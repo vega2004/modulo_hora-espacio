@@ -132,3 +132,91 @@
 .matriz-edificio-disponibilidad tbody tr:nth-child(even) {
   background-color: #fcfcfc;
 }
+
+/* 📱 Teléfonos pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .wrapper-matriz-edificio {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .controles-edificio-select {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .controles-edificio-select select {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .wrapper-matriz-edificio h2 {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .matriz-edificio-disponibilidad th,
+  .matriz-edificio-disponibilidad td {
+    padding: 0.45rem;
+    font-size: 0.75rem;
+    min-width: 80px;
+  }
+
+  .celda-edificio-ocupada div {
+    font-size: 0.75rem;
+  }
+
+  .celda-edificio-ocupada div small {
+    font-size: 0.65rem;
+  }
+}
+
+/* 📱 Teléfonos medianos (481px - 767px) */
+@media (max-width: 767px) {
+  .controles-edificio-select {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controles-edificio-select select {
+    width: 100%;
+  }
+
+  .wrapper-matriz-edificio h2 {
+    font-size: 1.9rem;
+  }
+}
+
+/* 📱 Tablets y pantallas medianas (768px - 1024px) */
+@media (max-width: 1024px) {
+  .matriz-edificio-disponibilidad th,
+  .matriz-edificio-disponibilidad td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .wrapper-matriz-edificio h2 {
+    font-size: 2.1rem;
+  }
+}
+
+/* 🖥️ Pantallas muy grandes (más de 1920px) */
+@media (min-width: 1921px) {
+  .wrapper-matriz-edificio {
+    max-width: 80%;
+  }
+
+  .matriz-edificio-disponibilidad {
+    font-size: 1.05rem;
+  }
+
+  .matriz-edificio-disponibilidad th,
+  .matriz-edificio-disponibilidad td {
+    padding: 1rem;
+  }
+
+  .wrapper-matriz-edificio h2 {
+    font-size: 2.6rem;
+  }
+}

@@ -16,7 +16,8 @@ const estaDentroDelRango = (slotInicio, slotFin, claseInicio, claseFin) => {
 };
 
 const normalizarTexto = (texto) =>
-    texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    (texto || '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
 
 const ClassroomAvailability = () => {
     const location = useLocation();
@@ -25,6 +26,7 @@ const ClassroomAvailability = () => {
 
     const [aulas, setAulas] = useState([]);
     const [aulaSeleccionada, setAulaSeleccionada] = useState('');
+    const [todasLasClases, setTodasLasClases] = useState([]);
     const [horarios, setHorarios] = useState([]);
 
     useEffect(() => {
@@ -34,44 +36,62 @@ const ClassroomAvailability = () => {
                 const res = await fetch(`https://localhost:7101/api/Aulas/clases/por-edificio/${edificio}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
+
                 const data = await res.json();
-                setAulas(data);
+                console.log('🧪 Datos de aulas por edificio:', data);
+
+                if (Array.isArray(data)) {
+                    const aulasUnicas = [];
+                    const idsRegistrados = new Set();
+
+                    data.forEach(aula => {
+                        if (!idsRegistrados.has(aula.idAula)) {
+                            idsRegistrados.add(aula.idAula);
+                            aulasUnicas.push({
+                                idAula: aula.idAula,
+                                aula: aula.aula
+                            });
+                        }
+                    });
+
+                    setAulas(aulasUnicas);
+                    setTodasLasClases(data);
+                } else {
+                    setAulas([]);
+                    setTodasLasClases([]);
+                }
             } catch (err) {
-                console.error('❌ Error al obtener aulas por edificio:', err);
+                console.error('❌ Error al obtener aulas:', err);
+                setAulas([]);
+                setTodasLasClases([]);
             }
         };
 
         if (edificio) fetchAulas();
     }, [edificio]);
 
+    // ✅ Filtrar clases por aula seleccionada
     useEffect(() => {
-        const fetchHorario = async () => {
-            if (!aulaSeleccionada) return;
+        if (!aulaSeleccionada) {
+            setHorarios([]);
+            return;
+        }
 
-            try {
-                const token = localStorage.getItem('authToken');
-                const res = await fetch(`https://localhost:7101/api/Clases/aula/${aulaSeleccionada}/horarios`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                const data = await res.json();
-                console.log('✅ Horarios obtenidos del backend:', data);
-                setHorarios(data);
-            } catch (err) {
-                console.error('❌ Error al obtener horario:', err);
-            }
-        };
-
-        fetchHorario();
-    }, [aulaSeleccionada]);
+        const clasesFiltradas = todasLasClases.filter(
+            (clase) => clase.idAula === parseInt(aulaSeleccionada)
+        );
+        setHorarios(clasesFiltradas);
+    }, [aulaSeleccionada, todasLasClases]);
 
     const renderCelda = (dia, hora) => {
         const [slotInicio, slotFin] = hora.split(' - ');
 
         const clase = horarios.find(h => {
-            const [claseInicio, claseFin] = h.horarios.split(' - ');
+            if (!h || !h.dia || !h.horaInicio || !h.horaFin) return false;
+
             return (
                 normalizarTexto(h.dia) === normalizarTexto(dia) &&
-                estaDentroDelRango(slotInicio, slotFin, claseInicio, claseFin)
+                estaDentroDelRango(slotInicio, slotFin, h.horaInicio, h.horaFin)
             );
         });
 
@@ -86,6 +106,7 @@ const ClassroomAvailability = () => {
             </td>
         );
     };
+
 
     const irAVistaGeneral = () => {
         navigate(`/BuildingAvailabilityMatrix?edificio=${edificio}`);
@@ -106,11 +127,15 @@ const ClassroomAvailability = () => {
                         onChange={(e) => setAulaSeleccionada(e.target.value)}
                     >
                         <option value="">Seleccione un aula</option>
-                        {aulas.map((aula) => (
-                            <option key={aula.idAula || aula.id} value={aula.idAula || aula.id}>
-                                {aula.aula || aula.nombre}
-                            </option>
-                        ))}
+                        {Array.isArray(aulas) && aulas.length > 0 ? (
+                            aulas.map((aula) => (
+                                <option key={aula.idAula} value={aula.idAula}>
+                                    {aula.aula}
+                                </option>
+                            ))
+                        ) : (
+                            <option disabled>No hay aulas disponibles</option>
+                        )}
                     </select>
 
                     <button onClick={irAVistaGeneral} className="btn-ver-disponibilidad">

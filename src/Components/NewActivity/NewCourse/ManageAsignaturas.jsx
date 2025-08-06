@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import './ManageAsignaturas.css';
 
+import { FaPlus, FaEdit, FaSearch } from 'react-icons/fa';
 const ManageAsignaturas = () => {
   const [asignaturas, setAsignaturas] = useState([]);
   const [nombre, setNombre] = useState('');
@@ -149,7 +150,15 @@ const ManageAsignaturas = () => {
         </datalist>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Guardando...' : editandoId ? 'Actualizar' : 'Agregar'}
+          {loading ? 'Guardando...' : editandoId ? (
+            <>
+              <FaEdit style={{ marginRight: '6px' }} /> Actualizar
+            </>
+          ) : (
+            <>
+              <FaPlus style={{ marginRight: '6px' }} /> Agregar
+            </>
+          )}
         </button>
       </form>
 

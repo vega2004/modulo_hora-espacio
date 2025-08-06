@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import './ManageAulas.css';
+import { FaPlus, FaEdit, FaSearch } from 'react-icons/fa';
 
 const TIPOS = ['Laboratorio', 'Aula'];
 const EDIFICIOS = ['A', 'B', 'C', 'D', 'E'];
@@ -151,7 +152,17 @@ const ManageAulas = () => {
           <option value="">Edificio</option>
           {EDIFICIOS.map(e => <option key={e} value={e}>{e}</option>)}
         </select>
-        <button type="submit" className="btn-guardar-aula" disabled={loading}>{loading ? 'Guardando...' : editandoId ? 'Actualizar' : 'Agregar'}</button>
+        <button type="submit" className='btn-guardar-aula' disabled={loading}>
+          {loading ? 'Guardando...' : editandoId ? (
+            <>
+              <FaEdit style={{ marginRight: '6px' }} /> Actualizar
+            </>
+          ) : (
+            <>
+              <FaPlus style={{ marginRight: '6px' }} /> Agregar
+            </>
+          )}
+        </button>
       </form>
 
       <div className="barra-busqueda-aula">
@@ -203,4 +214,4 @@ const ManageAulas = () => {
   );
 };
 
-export default ManageAulas;
+export default ManageAulas; 

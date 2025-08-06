@@ -58,9 +58,6 @@
   background: linear-gradient(to right, #841816, #a11c1a);
   color: white;
   border: none;
-   flex: 1 1 20%;
-  max-width: 120px;
-  align-self: flex-end;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
@@ -92,7 +89,7 @@
   color: #1a202c;
   transition: border-color 0.2s ease-in-out;
   width: 280px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .barra-busqueda-aula input:focus {
@@ -144,8 +141,8 @@
 
 .tabla-aulas td {
   padding: 1rem;
-  border-bottom: 1px solid #d1d5db;
-  border-right: 1px solid #d1d5db;
+  border-bottom: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
   background-color: #fefefe;
   color: #1a202c;
 }
@@ -227,34 +224,103 @@
   cursor: not-allowed;
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
+/* 📲 Móviles medianos (≤768px) */
+@media (max-width: 768px) {
+  .crear-aula-container {
+    padding: 1rem;
+  }
+
+  .formulario-aula input,
+  .formulario-aula select {
+    min-width: 100%;
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .btn-guardar-aula {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .barra-busqueda-aula input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .tabla-aulas td button {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+/* 📳 Móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .crear-aula-container h2 {
+    font-size: 1.4rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .tabla-aulas thead {
+    display: none;
+  }
+
+  .tabla-aulas tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+  }
+
+  .tabla-aulas td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tabla-aulas td:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-aulas td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #841816;
+  }
+
+  .tabla-aulas td button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px) {
   .formulario-aula {
-    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .formulario-aula input,
+  .formulario-aula select {
+    flex: 1 1 100%;
   }
 
   .barra-busqueda-aula {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .barra-busqueda-aula input,
   .barra-busqueda-aula button {
     width: 100%;
   }
+}
 
-  .tabla-aulas th,
-  .tabla-aulas td {
-    font-size: 0.85rem;
-  }
-
-  .btn-guardar-aula {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .tabla-aulas td button {
-    margin-bottom: 0.3rem;
-    width: 100%;
+/* 🖥️ Pantallas grandes (≥1440px) */
+@media (min-width: 1440px) {
+  .crear-aula-container {
+    max-width: 1300px;
   }
 }

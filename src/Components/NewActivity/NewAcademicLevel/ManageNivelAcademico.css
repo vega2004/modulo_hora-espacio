@@ -126,27 +126,29 @@
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
   font-size: 0.95rem;
   overflow: hidden;
+  text-align: center;
 }
 
 .tabla-nivel-academico thead th {
   background-color: #841816;
   color: white;
   padding: 1rem;
-  text-align: center;
   font-weight: 600;
   border-bottom: 3px solid #e5e7eb;
 }
 
 .tabla-nivel-academico td {
   padding: 1rem;
-  border-bottom: 1px solid #d1d5db;
-  text-align: center;
+  border-bottom: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
+  /* ✅ agrega esto para líneas verticales */
   background-color: #fefefe;
   color: #1a202c;
 }
 
-.tabla-nivel-academico tbody tr:nth-child(even) {
-  background-color: #f9fafb;
+/* Elimina la línea derecha del último td para evitar doble borde */
+.tabla-nivel-academico td:last-child {
+  border-right: none;
 }
 
 .tabla-nivel-academico tbody tr:hover {
@@ -213,29 +215,110 @@
   cursor: not-allowed;
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .manage-nivel-academico-container {
+    padding: 1rem;
+  }
+
+  .form-nivel-academico {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
   .form-nivel-academico input,
   .form-nivel-academico select {
+    width: 100%;
     flex: 1 1 100%;
+  }
+
+  .form-nivel-academico button {
+    width: 100%;
   }
 
   .barra-busqueda {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.6rem;
   }
 
-  .barra-busqueda input {
+  .barra-busqueda input,
+  .barra-busqueda button {
     width: 100%;
   }
 
   .tabla-nivel-academico thead th,
   .tabla-nivel-academico td {
-    font-size: 0.85rem;
+    padding: 0.8rem;
+  }
+}
+
+/* 📱 Móviles grandes (≤768px) */
+@media (max-width: 768px) {
+  .manage-nivel-academico-container h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
   }
 
-  .tabla-nivel-academico td button {
-    width: 100%;
-    margin-bottom: 0.5rem;
+  .form-nivel-academico input,
+  .form-nivel-academico select {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .form-nivel-academico button {
+    font-size: 0.95rem;
+  }
+
+  .tabla-nivel-academico {
+    font-size: 0.9rem;
+  }
+
+  .paginacion {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* 📳 Móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .manage-nivel-academico-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .form-nivel-academico {
+    padding: 1rem;
+  }
+
+  .form-nivel-academico button {
+    padding: 0.6rem 1rem;
+  }
+
+  .tabla-nivel-academico thead {
+    display: none;
+  }
+
+  .tabla-nivel-academico tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .tabla-nivel-academico td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tabla-nivel-academico td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #841816;
+  }
+
+  .tabla-nivel-academico td:last-child {
+    border-bottom: none;
   }
 }

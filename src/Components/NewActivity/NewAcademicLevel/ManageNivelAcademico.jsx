@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { FaPlus, FaEdit, FaSearch } from 'react-icons/fa';
 import './ManageNivelAcademico.css';
 
 const TIPOS_BASE = ['Bachillerato', 'Licenciatura'];
@@ -187,7 +188,19 @@ const ManageNivelAcademico = () => {
         )}
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Guardando…' : editandoId ? 'Actualizar' : 'Guardar'}
+          {loading ? (
+            'Guardando...'
+          ) : editandoId ? (
+            <>
+              <FaEdit style={{ marginRight: '6px' }} />
+              Actualizar
+            </>
+          ) : (
+            <>
+              <FaPlus style={{ marginRight: '6px' }} />
+              Agregar
+            </>
+          )}
         </button>
       </form>
 
@@ -199,9 +212,7 @@ const ManageNivelAcademico = () => {
           onChange={(e) => setBusqueda(e.target.value)}
         />
         <button onClick={() => buscarNiveles(busqueda)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path fill="currentColor" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l4.39 4.38-1.4 1.42-4.4-4.39zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
-          </svg>
+          <FaSearch />
           Buscar
         </button>
       </div>

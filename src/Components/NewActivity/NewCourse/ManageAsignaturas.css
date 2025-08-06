@@ -135,8 +135,10 @@
 
 .tabla-asignaturas th,
 .tabla-asignaturas td {
-  text-align: center;     /* ✅ Centra horizontalmente */
-  vertical-align: middle; /* ✅ Centra verticalmente */
+  text-align: center;
+  /* ✅ Centra horizontalmente */
+  vertical-align: middle;
+  /* ✅ Centra verticalmente */
 }
 
 .tabla-asignaturas thead th {
@@ -149,8 +151,8 @@
 
 .tabla-asignaturas td {
   padding: 1rem;
-  border-bottom: 1px solid #d1d5db;
-  border-right: 1px solid #d1d5db;
+  border-bottom: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
   background-color: #fefefe;
   color: #1a202c;
 }
@@ -232,31 +234,100 @@
   cursor: not-allowed;
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
-  .form-nueva-asignatura {
-    flex-direction: column;
-    align-items: stretch;
+/* 📲 Móviles medianos (≤768px) */
+@media (max-width: 768px) {
+  .manage-asignaturas-container {
+    padding: 1rem;
   }
 
-  .tabla-asignaturas th,
-  .tabla-asignaturas td {
+  .form-nueva-asignatura input {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .form-nueva-asignatura button {
+    font-size: 0.95rem;
+    width: 100%;
+  }
+
+  .barra-busqueda input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .tabla-asignaturas td button {
+    padding: 0.5rem 0.8rem;
     font-size: 0.85rem;
   }
+}
 
-  .form-nueva-asignatura button,
+/* 📳 Móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .manage-asignaturas-container h2 {
+    font-size: 1.4rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .tabla-asignaturas thead {
+    display: none;
+  }
+
+  .tabla-asignaturas tbody tr {
+    display: block;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+  }
+
+  .tabla-asignaturas td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tabla-asignaturas td:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-asignaturas td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #841816;
+  }
+
   .tabla-asignaturas td button {
     width: 100%;
     margin-bottom: 0.5rem;
   }
+}
+
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .form-nueva-asignatura {
+    gap: 0.75rem;
+  }
+
+  .form-nueva-asignatura input {
+    flex: 1 1 100%;
+  }
 
   .barra-busqueda {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .barra-busqueda input,
   .barra-busqueda button {
     width: 100%;
+  }
+}
+
+/* 🖥️ Escritorios grandes y TV (≥1440px) */
+@media (min-width: 1440px) {
+  .manage-asignaturas-container {
+    max-width: 1300px;
   }
 }

@@ -16,7 +16,7 @@ body {
   border-radius: 16px;
   border: 1px solid #e5e7eb;
   backdrop-filter: blur(10px);
-   box-shadow:
+  box-shadow:
     0 12px 25px rgba(0, 0, 0, 0.12),
     0 20px 40px rgba(0, 0, 0, 0.08),
     0 6px 12px rgba(0, 0, 0, 0.06);
@@ -169,10 +169,77 @@ body {
   color: #065f46;
 }
 
-/* Responsive */
+/* 💻 Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .wrapper-registro {
+    margin: 40px auto;
+    padding: 36px 28px;
+  }
+
+  .wrapper-registro h1 {
+    font-size: 26px;
+  }
+
+  .wrapper-registro button {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .remember-forgot-registro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* 📱 Smartphones grandes */
+@media (max-width: 768px) {
+  .wrapper-registro {
+    margin: 30px 20px;
+    padding: 30px 24px;
+  }
+
+  .input-box-registro input {
+    padding: 12px 40px;
+    font-size: 14px;
+  }
+
+  .input-box-registro .icon-left,
+  .input-box-registro .toggle-password {
+    font-size: 16px;
+  }
+
+  .wrapper-registro h1 {
+    font-size: 24px;
+  }
+
+  .register-link-registro {
+    font-size: 13px;
+  }
+}
+
+/* 📳 Smartphones pequeños */
 @media (max-width: 480px) {
   .wrapper-registro {
-    margin: 40px 16px;
-    padding: 32px 20px;
+    margin: 24px 16px;
+    padding: 28px 18px;
+  }
+
+  .wrapper-registro h1 {
+    font-size: 22px;
+  }
+
+  .input-box-registro input {
+    font-size: 13px;
+    padding: 12px 38px;
+  }
+
+  .wrapper-registro button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .register-link-registro {
+    font-size: 12px;
   }
 }

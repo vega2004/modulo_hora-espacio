@@ -142,8 +142,8 @@
 
 .tabla-docentes td {
   padding: 1rem;
-  border-bottom: 1px solid #d1d5db;
-  border-right: 1px solid #d1d5db;
+  border-bottom: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
   background-color: #fefefe;
   color: #1a202c;
 }
@@ -225,34 +225,98 @@
   cursor: not-allowed;
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
+/* 📲 Móviles medianos (≤768px) */
+@media (max-width: 768px) {
+  .manage-docentes-container {
+    padding: 1rem;
+  }
+
+  .form-nuevo-docente input {
+    flex: 1 1 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .form-nuevo-docente button {
+    font-size: 0.95rem;
+    width: 100%;
+  }
+
+  .barra-busqueda input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .tabla-docentes {
+    font-size: 0.9rem;
+  }
+
+  .tabla-docentes td button {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* 📳 Móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .manage-docentes-container h2 {
+    font-size: 1.4rem;
+    margin: 2.5rem 0 1rem;
+  }
+
   .form-nuevo-docente {
-    flex-direction: column;
+    padding: 1rem 0.75rem;
+  }
+
+  .tabla-docentes thead {
+    display: none;
+  }
+
+  .tabla-docentes tbody tr {
+    display: block;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+  }
+
+  .tabla-docentes td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tabla-docentes td:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-docentes td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #841816;
+  }
+
+  .tabla-docentes td button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .form-nuevo-docente input {
+    flex: 1 1 45%;
   }
 
   .barra-busqueda {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .barra-busqueda input,
   .barra-busqueda button {
-    width: 100%;
-  }
-
-  .tabla-docentes th,
-  .tabla-docentes td {
-    font-size: 0.85rem;
-  }
-
-  .form-nuevo-docente button {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .tabla-docentes td button {
-    margin-bottom: 0.3rem;
     width: 100%;
   }
 }

@@ -8,12 +8,16 @@
 
 /* Título */
 .classsearch-title {
-  font-size: 2.1rem !important;         /* más grande */
+  font-size: 2.1rem !important;
+  /* más grande */
   font-weight: 700;
-  color: #841816;                   /* rojo UAEH */
+  color: #841816;
+  /* rojo UAEH */
   text-align: center;
-  margin: 4rem 0 2rem;              /* mayor separación arriba y abajo */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);  /* sombra suave */
+  margin: 4rem 0 2rem;
+  /* mayor separación arriba y abajo */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  /* sombra suave */
 }
 
 /* Filtros */
@@ -44,9 +48,11 @@
   border: 1px solid #bbb;
   border-radius: 8px;
   font-size: 0.95rem;
-  background-color: #e2e8f0; /* gris visible */
+  background-color: #e2e8f0;
+  /* gris visible */
   color: #1e293b;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* sombra más prominente */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  /* sombra más prominente */
   transition: all 0.3s ease;
 }
 
@@ -128,12 +134,15 @@
 .classsearch-table thead th:first-child {
   border-top-left-radius: 12px;
 }
+
 .classsearch-table thead th:last-child {
   border-top-right-radius: 12px;
 }
+
 .classsearch-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 12px;
 }
+
 .classsearch-table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 12px;
 }
@@ -164,4 +173,76 @@
 .no-results-icon {
   width: 64px;
   opacity: 0.6;
+}
+
+/* 📱 Teléfonos y pantallas pequeñas */
+@media (max-width: 768px) {
+  .classsearch-title {
+    font-size: 1.6rem !important;
+    margin: 2rem 0 1rem;
+  }
+
+  .classsearch-filters {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .btn-buscar {
+    grid-column: span 1;
+    width: 100%;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .classsearch-table thead {
+    display: none;
+  }
+
+  .classsearch-table tbody tr {
+    display: block;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .classsearch-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .classsearch-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #841816;
+    flex: 1;
+    text-align: left;
+  }
+
+  .no-results-row td {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* 📲 Tablets */
+@media (max-width: 1024px) {
+  .classsearch-filters {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .btn-buscar {
+    font-size: 0.88rem;
+  }
+}
+
+/* 🖥️ Pantallas grandes y TVs */
+@media (min-width: 1440px) {
+  .classsearch-report-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }

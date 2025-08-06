@@ -309,3 +309,233 @@ html {
     font-size: 28px;
   }
 }
+
+@media (max-width: 1024px) {
+  .navbar-container {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+  }
+
+  .navbar-content-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .navbar-title {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .side-menu {
+    width: 220px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .navbar-logo-section {
+    padding: 0 16px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .navbar-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .hamburger-btn {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+
+  .side-menu {
+    top: 0;
+    height: 100vh;
+    width: 210px;
+    padding-top: 80px;
+  }
+
+  .side-menu a,
+  .side-menu button {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  .menu-section-title {
+    font-size: 13px;
+    padding-left: 8px;
+  }
+
+  .main-content {
+    padding: 1rem;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-logo {
+    width: 100px;
+  }
+
+  .navbar-title {
+    font-size: 20px;
+  }
+
+  .navbar-content-section {
+    padding: 0 16px;
+    gap: 0.5rem;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navbar-link {
+    font-size: 14px;
+  }
+
+  .side-menu a,
+  .side-menu button {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+}
+
+/* 📺 Pantallas grandes como TVs */
+@media (min-width: 1441px) {
+  .main-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+}
+
+/* 💻 Escritorios medianos (laptops) */
+@media (max-width: 1280px) {
+  .navbar-title {
+    font-size: 40px;
+  }
+
+  .hamburger-btn {
+    display: block;
+  }
+}
+
+/* 📟 Tablets (paisaje y retrato) */
+@media (max-width: 1024px) {
+  .navbar-container {
+    flex-direction: column;
+    padding: 10px 20px;
+    height: auto;
+  }
+
+  .navbar-content-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+  }
+
+  .navbar-title {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .side-menu {
+    width: 220px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+/* 📱 Móviles */
+@media (max-width: 768px) {
+  .navbar-logo-section {
+    padding: 0 16px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .navbar-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .hamburger-btn {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+
+  .side-menu {
+    width: 210px;
+    padding-top: 80px;
+  }
+
+  .side-menu a,
+  .side-menu button {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  .menu-section-title {
+    font-size: 13px;
+    padding-left: 8px;
+  }
+
+  .main-content {
+    padding: 1rem;
+    margin-left: 0;
+  }
+}
+
+/* 📳 Teléfonos pequeños */
+@media (max-width: 480px) {
+  .navbar-logo {
+    width: 100px;
+  }
+
+  .navbar-title {
+    font-size: 20px;
+  }
+
+  .navbar-content-section {
+    padding: 0 16px;
+    gap: 0.5rem;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navbar-link {
+    font-size: 14px;
+  }
+
+  .side-menu a,
+  .side-menu button {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+}

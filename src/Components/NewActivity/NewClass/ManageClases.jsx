@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Swal from 'sweetalert2';
 import './ManageClases.css';
+import { FaSearch } from 'react-icons/fa';
+import { FaPlus, FaEdit } from 'react-icons/fa';
+
+
 
 const ManageClases = () => {
   const [form, setForm] = useState({
@@ -98,7 +102,6 @@ const ManageClases = () => {
       for (let campo of campos) {
         const body = {};
 
-        // Agrega dinámicamente el campo con valor si aplica
         if (['grado', 'capacidad'].includes(campo)) {
           const numero = parseInt(busqueda);
           if (!isNaN(numero)) {
@@ -121,15 +124,14 @@ const ManageClases = () => {
         }
       }
 
-      // Eliminar duplicados por ID
       const clasesUnicas = resultadosTotales.filter(
         (item, index, self) => index === self.findIndex(t => t.id === item.id)
       );
 
       if (clasesUnicas.length > 0) {
-        setClases(clasesUnicas);     // 🔥 Esto reemplaza completamente la lista
-        setPaginaActual(1);          // ✅ Volver a la página 1
-        document.querySelector('.tabla-clases')?.scrollIntoView({ behavior: 'smooth' }); // (opcional)
+        setClases(clasesUnicas);
+        setPaginaActual(1);
+        document.querySelector('.tabla-clases')?.scrollIntoView({ behavior: 'smooth' });
       } else {
         setClases([]);
         Swal.fire({
@@ -138,13 +140,11 @@ const ManageClases = () => {
           text: 'No se encontraron clases con ese término.'
         });
       }
-
     } catch (err) {
       console.error('Error en búsqueda:', err);
       Swal.fire({ icon: 'error', title: 'Error', text: 'Falló la búsqueda.' });
     }
   };
-
 
   useEffect(() => {
     cargarOpciones();
@@ -152,10 +152,7 @@ const ManageClases = () => {
   }, []);
 
   useEffect(() => {
-    if (busqueda.trim() === '') {
-      console.log('Busqueda vacía, recargando clases...');
-      cargarClases();
-    }
+    if (busqueda.trim() === '') cargarClases();
   }, [busqueda]);
 
   const handleChange = (e) => {
@@ -163,9 +160,30 @@ const ManageClases = () => {
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
+  const validarTraslape = () => {
+    const inicioNueva = form.horaInicio;
+    const finNueva = form.horaFin;
+    const idAula = parseInt(form.idAula);
+    const idDia = parseInt(form.idDia);
+
+    return clases.some(c =>
+      parseInt(c.idAula) === idAula &&
+      parseInt(c.idDia) === idDia &&
+      (!editandoId || c.id !== editandoId) &&
+      inicioNueva < c.horaFin &&
+      finNueva > c.horaInicio
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (validarTraslape()) {
+      Swal.fire({ icon: 'error', title: 'Traslape detectado', text: 'El aula ya está ocupada en ese horario.' });
+      setLoading(false);
+      return;
+    }
 
     try {
       const url = editandoId
@@ -183,11 +201,7 @@ const ManageClases = () => {
         idDia: parseInt(form.idDia)
       };
 
-      const res = await fetch(url, {
-        method,
-        headers,
-        body: JSON.stringify(body)
-      });
+      const res = await fetch(url, { method, headers, body: JSON.stringify(body) });
 
       if (!res.ok) throw new Error();
 
@@ -198,18 +212,10 @@ const ManageClases = () => {
         showConfirmButton: false
       });
 
-      setForm({
-        idProfesor: '',
-        idAsignatura: '',
-        idNivelAcademico: '',
-        idAula: '',
-        horaInicio: '',
-        horaFin: '',
-        idDia: ''
-      });
+      setForm({ idProfesor: '', idAsignatura: '', idNivelAcademico: '', idAula: '', horaInicio: '', horaFin: '', idDia: '' });
       setEditandoId(null);
       cargarClases();
-    } catch (err) {
+    } catch {
       Swal.fire({ icon: 'error', title: 'Error', text: 'Error al guardar clase' });
     } finally {
       setLoading(false);
@@ -217,8 +223,6 @@ const ManageClases = () => {
   };
 
   const handleEditar = (clase) => {
-    console.log("Clase a editar:", clase);
-
     setEditandoId(clase.id);
     setForm({
       idProfesor: clase.idProfesor?.toString() || '',
@@ -250,72 +254,106 @@ const ManageClases = () => {
       try {
         const url = `https://localhost:7101/api/Clases/eliminar/${clase.id}`;
         const res = await fetch(url, { method: 'DELETE', headers });
-
         if (!res.ok) throw new Error();
-
         Swal.fire({ icon: 'success', title: 'Clase eliminada', timer: 1200, showConfirmButton: false });
         cargarClases();
-      } catch (err) {
+      } catch {
         Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudo eliminar la clase' });
       }
     }
   };
 
   const horarios = generarHoras();
-  const clasesPaginadas = Array.isArray(clases)
-    ? clases.slice((paginaActual - 1) * elementosPorPagina, paginaActual * elementosPorPagina)
-    : [];
-  const totalPaginas = Math.ceil((Array.isArray(clases) ? clases.length : 0) / elementosPorPagina);
+  const clasesPaginadas = clases.slice((paginaActual - 1) * elementosPorPagina, paginaActual * elementosPorPagina);
+  const totalPaginas = Math.ceil(clases.length / elementosPorPagina);
 
   return (
     <div className="manage-clases-container">
       <h2>Gestionar Clases</h2>
-
       <form ref={formRef} className="form-nueva-clase" onSubmit={handleSubmit}>
-        <select name="idProfesor" value={form.idProfesor} onChange={handleChange} required>
-          <option value="">Seleccione Profesor</option>
-          {opciones.profesores.map(p => (
-            <option key={p.id} value={p.id.toString()}>{`${p.nombre} ${p.apPaterno} ${p.apMaterno}`}</option>
-          ))}
-        </select>
-        <select name="idAsignatura" value={form.idAsignatura} onChange={handleChange} required>
-          <option value="">Seleccione Asignatura</option>
-          {opciones.asignaturas.map(a => (
-            <option key={a.id} value={a.id.toString()}>{a.nombre}</option>
-          ))}
-        </select>
-        <select name="idNivelAcademico" value={form.idNivelAcademico} onChange={handleChange} required>
-          <option value="">Seleccione Nivel Académico</option>
-          {opciones.niveles.map(n => (
-            <option key={n.id} value={n.id.toString()}>{`${n.tipo} - ${n.grado}° ${n.grupo} (${n.carrera})`}</option>
-          ))}
-        </select>
-        <select name="idAula" value={form.idAula} onChange={handleChange} required>
-          <option value="">Seleccione Aula</option>
-          {opciones.aulas.map(a => (
-            <option key={a.id} value={a.id.toString()}>{`${a.nombre} (cap. ${a.capacidad})`}</option>
-          ))}
-        </select>
-        <select name="horaInicio" value={form.horaInicio} onChange={handleChange} required>
-          <option value="">Hora Inicio</option>
-          {horarios.map((h, i) => (
-            <option key={i} value={h}>{h}</option>
-          ))}
-        </select>
-        <select name="horaFin" value={form.horaFin} onChange={handleChange} required>
-          <option value="">Hora Fin</option>
-          {horarios.map((h, i) => (
-            <option key={i} value={h}>{h}</option>
-          ))}
-        </select>
-        <select name="idDia" value={form.idDia} onChange={handleChange} required>
-          <option value="">Día</option>
-          {opciones.dias.map(d => (
-            <option key={d.id} value={d.id.toString()}>{d.nombre}</option>
-          ))}
-        </select>
-        <button type="submit" disabled={loading}>{loading ? 'Guardando...' : editandoId ? 'Actualizar' : 'Agregar'}</button>
+        <div className="form-columns">
+          <div className="columna-form">
+            <select name="idProfesor" value={form.idProfesor} onChange={handleChange} required>
+              <option value="">Seleccione Profesor</option>
+              {opciones.profesores.map(p => (
+                <option key={p.id} value={p.id.toString()}>{`${p.nombre} ${p.apPaterno} ${p.apMaterno}`}</option>
+              ))}
+            </select>
+
+            <select name="idAula" value={form.idAula} onChange={handleChange} required>
+              <option value="">Seleccione Aula</option>
+              {opciones.aulas.map(a => (
+                <option key={a.id} value={a.id.toString()}>{`${a.nombre} (cap. ${a.capacidad})`}</option>
+              ))}
+            </select>
+
+            <div className="contenedor-dia-agregar">
+              <select
+                name="idDia"
+                className="select-dia"
+                value={form.idDia}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Día</option>
+                {opciones.dias.map(d => (
+                  <option key={d.id} value={d.id.toString()}>{d.nombre}</option>
+                ))}
+              </select>
+
+              <button type="submit" className="boton-agregar-clase" disabled={loading}>
+                {loading ? (
+                  'Guardando...'
+                ) : editandoId ? (
+                  <>
+                    <FaEdit style={{ marginRight: '6px' }} />
+                    Actualizar
+                  </>
+                ) : (
+                  <>
+                    <FaPlus style={{ marginRight: '6px' }} />
+                    Agregar
+                  </>
+                )}
+              </button>
+
+            </div>
+          </div>
+
+          <div className="columna-form">
+            <select name="idAsignatura" value={form.idAsignatura} onChange={handleChange} required>
+              <option value="">Seleccione Asignatura</option>
+              {opciones.asignaturas.map(a => (
+                <option key={a.id} value={a.id.toString()}>{a.nombre}</option>
+              ))}
+            </select>
+
+            <select name="horaInicio" value={form.horaInicio} onChange={handleChange} required>
+              <option value="">Hora Inicio</option>
+              {horarios.map((h, i) => (
+                <option key={i} value={h}>{h}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="columna-form">
+            <select name="idNivelAcademico" value={form.idNivelAcademico} onChange={handleChange} required>
+              <option value="">Seleccione Nivel Académico</option>
+              {opciones.niveles.map(n => (
+                <option key={n.id} value={n.id.toString()}>{`${n.tipo} - ${n.grado}° ${n.grupo} (${n.carrera})`}</option>
+              ))}
+            </select>
+
+            <select name="horaFin" value={form.horaFin} onChange={handleChange} required>
+              <option value="">Hora Fin</option>
+              {horarios.map((h, i) => (
+                <option key={i} value={h}>{h}</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </form>
+
 
       <div className="barra-busqueda">
         <input
@@ -324,8 +362,12 @@ const ManageClases = () => {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <button onClick={buscarClases}>Buscar</button>
+        <button onClick={buscarClases}>
+          <FaSearch />
+          Buscar
+        </button>
       </div>
+
 
       <table className="tabla-clases">
         <thead>
@@ -364,14 +406,16 @@ const ManageClases = () => {
         </tbody>
       </table>
 
-      {totalPaginas > 1 && (
-        <div className="paginacion">
-          <button onClick={() => setPaginaActual(p => p - 1)} disabled={paginaActual === 1}>◀</button>
-          <span>Página {paginaActual} de {totalPaginas}</span>
-          <button onClick={() => setPaginaActual(p => p + 1)} disabled={paginaActual === totalPaginas}>▶</button>
-        </div>
-      )}
-    </div>
+      {
+        totalPaginas > 1 && (
+          <div className="paginacion">
+            <button onClick={() => setPaginaActual(p => p - 1)} disabled={paginaActual === 1}>◀</button>
+            <span>Página {paginaActual} de {totalPaginas}</span>
+            <button onClick={() => setPaginaActual(p => p + 1)} disabled={paginaActual === totalPaginas}>▶</button>
+          </div>
+        )
+      }
+    </div >
   );
 };
 

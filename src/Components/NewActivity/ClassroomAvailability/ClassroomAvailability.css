@@ -128,3 +128,97 @@
   font-weight: normal;
   font-size: 0.85rem;
 }
+
+/* 📱 Teléfonos pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .seccion-controles-aulas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .acciones-derecha-aulas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .btn-volver-panel,
+  .btn-ver-disponibilidad,
+  .wrapper-select-aulas select {
+    width: 100%;
+  }
+
+  .titulo-matriz-aulas {
+    font-size: 1.5rem !important;
+    margin-top: 2rem;
+  }
+
+  .matriz-disponibilidad-aulas th,
+  .matriz-disponibilidad-aulas td {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .hora-etiqueta {
+    font-size: 0.8rem;
+  }
+
+  .celda-reservada div {
+    font-size: 0.75rem;
+  }
+
+  .celda-reservada small {
+    font-size: 0.7rem;
+  }
+}
+
+/* 📱 Teléfonos medianos (481px - 767px) */
+@media (max-width: 767px) {
+  .seccion-controles-aulas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .acciones-derecha-aulas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-volver-panel,
+  .btn-ver-disponibilidad,
+  .wrapper-select-aulas select {
+    width: 100%;
+  }
+}
+
+/* 📱📲 Tablets y pantallas medianas (768px - 1024px) */
+@media (max-width: 1024px) {
+
+  .matriz-disponibilidad-aulas th,
+  .matriz-disponibilidad-aulas td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .titulo-matriz-aulas {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* 🖥️ Pantallas grandes (más de 1920px) */
+@media (min-width: 1921px) {
+  .matriz-disponibilidad-aulas {
+    font-size: 1.05rem;
+  }
+
+  .matriz-disponibilidad-aulas th,
+  .matriz-disponibilidad-aulas td {
+    padding: 1rem;
+  }
+
+  .titulo-matriz-aulas {
+    font-size: 2.5rem !important;
+  }
+}

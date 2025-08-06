@@ -147,10 +147,67 @@ body {
   color: #065f46;
 }
 
-/* Responsive */
+/* 💻 Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .wrapper-login {
+    margin: 60px auto;
+    padding: 36px 28px;
+  }
+
+  .wrapper-login h1 {
+    font-size: 26px;
+  }
+
+  .wrapper-login button {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* 📱 Smartphones grandes (≤768px) */
+@media (max-width: 768px) {
+  .wrapper-login {
+    margin: 50px 20px;
+    padding: 32px 24px;
+  }
+
+  .input-box-login input {
+    padding: 12px 40px 12px 40px;
+    font-size: 14px;
+  }
+
+  .toggle-password,
+  .icon-left {
+    font-size: 16px;
+  }
+
+  .wrapper-login h1 {
+    font-size: 24px;
+  }
+}
+
+/* 📳 Smartphones pequeños (≤480px) */
 @media (max-width: 480px) {
   .wrapper-login {
     margin: 40px 16px;
-    padding: 32px 20px;
+    padding: 28px 18px;
+  }
+
+  .wrapper-login h1 {
+    font-size: 22px;
+  }
+
+  .input-box-login input {
+    padding: 12px 38px 12px 38px;
+    font-size: 13px;
+  }
+
+  .wrapper-login button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .register-link-login {
+    font-size: 13px;
   }
 }

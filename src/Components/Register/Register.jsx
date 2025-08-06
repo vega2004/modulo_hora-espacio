@@ -31,11 +31,12 @@ const Register = () => {
             return;
         }
 
-        if (pass.trim().length < 8) {
-            setError("La contraseña debe tener al menos 6 caracteres.");
+        if (pass.trim().length < 8 || pass.trim().length > 10) {
+            setError("La contraseña debe tener entre 8 y 10 caracteres.");
             setSuccess('');
             return;
         }
+
 
         if (pass !== confirmPassword) {
             setError("Las contraseñas no coinciden.");
@@ -43,7 +44,7 @@ const Register = () => {
             return;
         }
 
-        if ([nombre, apellidos, email, pass, confirmPassword].some(f => f.includes(' '))) {
+        if ([email, pass, confirmPassword].some(f => f && f.includes(' '))) {
             setError("Los campos no deben contener espacios.");
             setSuccess('');
             return;
@@ -59,7 +60,6 @@ const Register = () => {
             pass
         };
 
-        // POST a la API
         try {
             const response = await fetch("https://localhost:7101/api/Usuarios/registro", {
                 method: "POST",
@@ -76,7 +76,9 @@ const Register = () => {
             if (response.ok) {
                 const data = await response.json();
                 setSuccess("¡Registro exitoso!");
-                navigate('/Login');
+                setTimeout(() => {
+                    navigate('/Login');
+                }, 1500);
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || "Error al registrar.");
@@ -154,7 +156,7 @@ const Register = () => {
                 <button type="submit">Registrar</button>
 
                 <div className="register-link-registro">
-                    <p>Ya tienes una cuenta? <Link to="/Login">Inicia Sesión</Link></p>
+                    <p>¿Ya tienes una cuenta? <Link to="/Login">Inicia Sesión</Link></p>
                 </div>
             </form>
         </div>

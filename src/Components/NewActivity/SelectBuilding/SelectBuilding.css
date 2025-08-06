@@ -60,3 +60,84 @@
   text-align: center;
   letter-spacing: 0.5px;
 }
+
+/* 📱 Teléfonos pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .select-building-container {
+    padding: 1rem 1rem 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .grid-edificios {
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .card-edificio {
+    max-width: 100%;
+  }
+
+  .imagen-edificio {
+    height: 150px;
+  }
+
+  .nombre-edificio {
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* 📱 Teléfonos medianos (481px - 767px) */
+@media (max-width: 767px) {
+  .grid-edificios {
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+}
+
+/* 📱 Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .grid-edificios {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+/* 🖥️ Pantallas muy grandes (más de 1920px) */
+@media (min-width: 1921px) {
+  .select-building-container {
+    max-width: 80%;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    padding: 1.2rem 3rem;
+  }
+
+  .grid-edificios {
+    gap: 2.5rem;
+  }
+
+  .card-edificio {
+    max-width: 280px;
+  }
+
+  .imagen-edificio {
+    height: 200px;
+  }
+
+  .nombre-edificio {
+    font-size: 1.2rem;
+  }
+}

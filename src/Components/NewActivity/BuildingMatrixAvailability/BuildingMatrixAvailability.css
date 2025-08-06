@@ -1,0 +1,134 @@
+/* 🏢 Estilo para matriz de aulas por edificio */
+
+/* 📦 Contenedor principal */
+.wrapper-matriz-edificio {
+  max-width: 95%;
+  margin: 3rem auto 2rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+}
+
+.h2 {
+  font-size: 2.1rem !important;
+  font-weight: 700;
+  color: #841816;
+  text-align: center;
+  margin: 4rem 0 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 📅 Título */
+.wrapper-matriz-edificio h2 {
+  text-align: center;
+  font-size: 2.3rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+/* 🔹 Controles de selección */
+.controles-edificio-select {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+}
+
+.controles-edificio-select select {
+  width: 260px;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background-color: #e2e8f0;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.controles-edificio-select select:focus {
+  border-color: #841816;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(132, 24, 22, 0.15);
+}
+
+/* 📊 Tabla de disponibilidad por edificio */
+.matriz-edificio-disponibilidad {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.matriz-edificio-disponibilidad th {
+  background: #841816;
+  color: #ffffff;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-right: 1px solid #b64a4a;
+}
+
+.matriz-edificio-disponibilidad td {
+  padding: 0.7rem;
+  vertical-align: middle;
+  text-align: center;
+  min-width: 110px;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  transition: background-color 0.2s ease;
+}
+
+/* ⏰ Celdas de hora */
+.matriz-edificio-disponibilidad .hora-columna {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  color: #444;
+  border-right: 2px solid #ccc;
+}
+
+/* ✅ Disponibles */
+.celda-edificio-libre {
+  background-color: #edf2f7;
+  color: #2e7d32;
+  font-weight: 500;
+  border-left: 3px solid #a6e2cd;
+}
+
+/* ❌ Ocupadas */
+.celda-edificio-ocupada {
+  background-color: #9b1c1c;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.2;
+  border-left: 3px solid #f4aaaa;
+}
+
+.matriz-edificio-disponibilidad td:hover:not(.hora-columna) {
+  background-color: #5a0d0c;
+}
+
+.celda-edificio-ocupada div small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  /* Blanco suave */
+}
+
+/* 🧾 Alternancia de filas */
+.matriz-edificio-disponibilidad tbody tr:nth-child(even) {
+  background-color: #fcfcfc;
+}

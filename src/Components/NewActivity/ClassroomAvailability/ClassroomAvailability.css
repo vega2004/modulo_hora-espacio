@@ -1,0 +1,130 @@
+/* 📀 Título centrado */
+.titulo-matriz-aulas {
+  font-size: 2.1rem !important;
+  font-weight: 700;
+  color: #841816;
+  text-align: center;
+  margin: 4rem 0 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 📦 Agrupación de controles */
+.seccion-controles-aulas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+/* 🪜 Alineación derecha de select y botón */
+.acciones-derecha-aulas {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+/* 🔙 Botón de inicio */
+.btn-volver-panel {
+  background-color: #6c757d;
+  color: white;
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.btn-volver-panel:hover {
+  background-color: #545b62;
+}
+
+/* 🔍 Botón de disponibilidad */
+.btn-ver-disponibilidad {
+  background: linear-gradient(to right, #841816, #a11c1a);
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
+  transition: background-color 0.3s ease;
+}
+
+.btn-ver-disponibilidad:hover {
+  background: #6e1211;
+}
+
+/* 🔹 Select */
+.wrapper-select-aulas select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background-color: #e2e8f0;
+  color: #1a202c;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease-in-out;
+}
+
+.wrapper-select-aulas select:focus {
+  border-color: #841816;
+  outline: none;
+}
+
+/* 📊 Tabla de disponibilidad */
+.matriz-disponibilidad-aulas {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.matriz-disponibilidad-aulas th,
+.matriz-disponibilidad-aulas td {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+.matriz-disponibilidad-aulas thead th {
+  background-color: #841816;
+  color: white;
+}
+
+.matriz-disponibilidad-aulas tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.hora-etiqueta {
+  font-weight: bold;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* 🔳 Celdas libres */
+.celda-disponible {
+  background-color: #edf2f7;
+  color: #1a202c;
+}
+
+/* 🔴 Celdas ocupadas */
+.celda-reservada {
+  background-color: #9b1c1c;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.celda-reservada small {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: normal;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,260 @@
+/* 📦 Contenedor principal */
+.crear-aula-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f9fb;
+}
+
+/* 🏷️ Título */
+.crear-aula-container h2 {
+  text-align: center;
+  color: #841816;
+  margin: 4rem 0 2rem;
+  font-weight: 800;
+  font-size: 2.1rem;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 🧾 Formulario */
+.formulario-aula {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+.formulario-aula input,
+.formulario-aula select {
+  flex: 1 1 28%;
+  padding: 0.65rem 1rem;
+  min-width: 200px;
+  max-width: 250px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #e2e8f0;
+  color: #1a202c;
+  transition: border-color 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-aula input:focus,
+.formulario-aula select:focus {
+  outline: none;
+  border-color: #841816;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+}
+
+.btn-guardar-aula {
+  padding: 0.65rem 1.4rem;
+  background: linear-gradient(to right, #841816, #a11c1a);
+  color: white;
+  border: none;
+   flex: 1 1 20%;
+  max-width: 120px;
+  align-self: flex-end;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-guardar-aula:hover:not(:disabled) {
+  background: #6e1211;
+  transform: translateY(-1px);
+}
+
+/* 🔍 Barra de búsqueda */
+.barra-busqueda-aula {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.barra-busqueda-aula input {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  background-color: #f1f5f9;
+  color: #1a202c;
+  transition: border-color 0.2s ease-in-out;
+  width: 280px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.barra-busqueda-aula input:focus {
+  outline: none;
+  border-color: #841816;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+}
+
+.barra-busqueda-aula button {
+  padding: 0.6rem 1.2rem;
+  background-color: #841816;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(132, 24, 22, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.barra-busqueda-aula button:hover {
+  background-color: #6e1211;
+}
+
+/* 📊 Tabla */
+.tabla-aulas {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.tabla-aulas thead th {
+  background-color: #841816;
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  border-bottom: 3px solid #e5e7eb;
+}
+
+.tabla-aulas td {
+  padding: 1rem;
+  border-bottom: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+  background-color: #fefefe;
+  color: #1a202c;
+}
+
+.tabla-aulas tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-aulas td:last-child {
+  border-right: none;
+}
+
+.tabla-aulas tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.tabla-aulas tbody tr:hover {
+  background-color: #edf2f7;
+  transition: background-color 0.3s ease;
+}
+
+/* 🛠️ Botones acción */
+.tabla-aulas td button {
+  margin: 0 0.3rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tabla-aulas .btn-editar-aula {
+  background-color: #2563eb;
+  color: white;
+}
+
+.tabla-aulas .btn-editar-aula:hover {
+  background-color: #1e40af;
+}
+
+.tabla-aulas .btn-eliminar-aula {
+  background-color: #dc2626;
+  color: white;
+}
+
+.tabla-aulas .btn-eliminar-aula:hover {
+  background-color: #991b1b;
+}
+
+/* 🔢 Paginación */
+.paginacion-aula {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.paginacion-aula button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #841816;
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s ease;
+}
+
+.paginacion-aula button:hover {
+  background-color: #6e1211;
+}
+
+.paginacion-aula button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .formulario-aula {
+    flex-direction: column;
+  }
+
+  .barra-busqueda-aula {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barra-busqueda-aula input,
+  .barra-busqueda-aula button {
+    width: 100%;
+  }
+
+  .tabla-aulas th,
+  .tabla-aulas td {
+    font-size: 0.85rem;
+  }
+
+  .btn-guardar-aula {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .tabla-aulas td button {
+    margin-bottom: 0.3rem;
+    width: 100%;
+  }
+}

@@ -1,0 +1,20 @@
+/* TitleWithTransition.css */
+.title {
+  opacity: 0; /* Comienza invisible */
+  transform: scale(0.8); /* Comienza más pequeño */
+  transition: 1s;
+  text-shadow: none;
+  text-align: center;
+  color: #BA0F16;
+  margin-bottom: 25px; /* Espacio debajo del título */
+}
+
+.title:hover {
+  transition: 1s;
+  transform: scale(1.5);
+}
+
+.title.active {
+  opacity: 1; /* Visible */
+  transform: scale(1); /* Escala a su tamaño original */
+}

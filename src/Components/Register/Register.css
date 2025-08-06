@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Contenedor principal registro */
+.wrapper-registro {
+  max-width: 420px;
+  margin: 15px auto;
+  padding: 40px 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  backdrop-filter: blur(10px);
+   box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.12),
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 6px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+  color: #841816;
+}
+
+.wrapper-registro:hover {
+  transform: translateY(-5px);
+}
+
+/* Título */
+.wrapper-registro h1 {
+  color: #575656;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Input Group */
+.input-box-registro {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input-box-registro input {
+  width: 100%;
+  padding: 14px 44px;
+  border: 1px solid #827f7f;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  font-size: 15px;
+  color: #111827;
+  transition: all 0.2s ease-in-out;
+}
+
+.input-box-registro input:focus {
+  border-color: #841816;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  outline: none;
+}
+
+.input-box-registro input::placeholder {
+  color: #9ca3af;
+}
+
+/* Iconos */
+.input-box-registro .icon-left {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #9ca3af;
+}
+
+.input-box-registro .toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+/* Recordar/olvidé contraseña */
+.remember-forgot-registro {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: -10px 0 20px;
+}
+
+.remember-forgot-registro label input {
+  accent-color: #841816;
+  margin-right: 6px;
+}
+
+.remember-forgot-registro a {
+  color: #575656;
+  text-decoration: none;
+}
+
+.remember-forgot-registro a:hover {
+  text-decoration: underline;
+}
+
+/* Botón */
+.wrapper-registro button {
+  width: 100%;
+  padding: 14px;
+  background-color: #841816;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.wrapper-registro button:hover {
+  background-color: #ba0f16;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px white, 0 0 30px white;
+}
+
+/* Registro link */
+.register-link-registro {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+  color: #6b7280;
+}
+
+.register-link-registro p a {
+  color: #841816;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link-registro p a:hover {
+  text-decoration: underline;
+}
+
+/* Mensajes */
+.error-message,
+.success-message {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.success-message {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .wrapper-registro {
+    margin: 40px 16px;
+    padding: 32px 20px;
+  }
+}

@@ -1,0 +1,167 @@
+/* Contenedor principal */
+.classsearch-report-container {
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f4f6;
+  min-height: 100vh;
+}
+
+/* Título */
+.classsearch-title {
+  font-size: 2.1rem !important;         /* más grande */
+  font-weight: 700;
+  color: #841816;                   /* rojo UAEH */
+  text-align: center;
+  margin: 4rem 0 2rem;              /* mayor separación arriba y abajo */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);  /* sombra suave */
+}
+
+/* Filtros */
+.classsearch-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Inputs y etiquetas */
+.classsearch-filters label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.classsearch-filters select,
+.classsearch-filters input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #e2e8f0; /* gris visible */
+  color: #1e293b;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* sombra más prominente */
+  transition: all 0.3s ease;
+}
+
+.classsearch-filters select:focus,
+.classsearch-filters input:focus {
+  background-color: #f8fafc;
+  border-color: #841816;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.3);
+  outline: none;
+}
+
+
+/* Botón de búsqueda */
+.btn-buscar {
+  grid-column: span 2;
+  padding: 0.6rem 1.3rem;
+  background-color: #841816;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  justify-self: start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-buscar:hover {
+  background-color: #6e1211;
+  transform: translateY(-1px);
+}
+
+/* Tabla moderna con divisiones */
+.classsearch-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+}
+
+/* Cabecera */
+.classsearch-table thead th {
+  background-color: #841816;
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Cuerpo */
+.classsearch-table tbody td {
+  padding: 0.9rem 1rem;
+  font-size: 0.92rem;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  background-color: #fdfdfd;
+  text-align: center;
+}
+
+/* Fila alternada */
+.classsearch-table tbody tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+/* Hover en fila */
+.classsearch-table tbody tr:hover {
+  background-color: #eaeaea;
+  transition: background-color 0.3s ease;
+}
+
+/* Bordes redondeados solo en esquinas exteriores */
+.classsearch-table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+.classsearch-table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+.classsearch-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.classsearch-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+/* Fila sin resultados */
+.no-results-row td {
+  text-align: center;
+  padding: 1.5rem;
+  font-style: italic;
+  background-color: #fff6f6;
+  color: #991b1b;
+  font-weight: 500;
+  border: none;
+}
+
+/* Visualización sin resultados */
+.no-results-message {
+  text-align: center;
+  padding: 1.5rem;
+  color: #991b1b;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.no-results-icon {
+  width: 64px;
+  opacity: 0.6;
+}

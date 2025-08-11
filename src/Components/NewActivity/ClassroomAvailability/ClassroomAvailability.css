@@ -38,10 +38,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
-
-.btn-volver-panel:hover {
-  background-color: #545b62;
-}
+.btn-volver-panel:hover { background-color: #545b62; }
 
 /* 🔍 Botón de disponibilidad */
 .btn-ver-disponibilidad {
@@ -56,10 +53,7 @@
   box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
   transition: background-color 0.3s ease;
 }
-
-.btn-ver-disponibilidad:hover {
-  background: #6e1211;
-}
+.btn-ver-disponibilidad:hover { background: #6e1211; }
 
 /* 🔹 Select */
 .wrapper-select-aulas select {
@@ -72,40 +66,50 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: border-color 0.3s ease-in-out;
 }
-
 .wrapper-select-aulas select:focus {
   border-color: #841816;
   outline: none;
 }
 
-/* 📊 Tabla de disponibilidad */
+/* 📊 Contenedor con scroll */
+.tabla-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+/* 📊 Tabla de disponibilidad adaptable */
 .matriz-disponibilidad-aulas {
   width: 100%;
+  min-width: 900px; /* Fuerza scroll si no cabe */
+  table-layout: fixed; /* Necesario para ellipsis */
   border-collapse: collapse;
   text-align: center;
   font-size: 0.95rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .matriz-disponibilidad-aulas th,
 .matriz-disponibilidad-aulas td {
   padding: 0.75rem;
   border: 1px solid #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
 .matriz-disponibilidad-aulas thead th {
   background-color: #841816;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
-
-.matriz-disponibilidad-aulas tbody tr:hover {
-  background-color: #f5f5f5;
-}
-
 .hora-etiqueta {
   font-weight: bold;
   background-color: #f8f9fa;
   color: #212529;
+  position: sticky;
+  left: 0;
+  z-index: 3;
 }
 
 /* 🔳 Celdas libres */
@@ -120,13 +124,14 @@
   color: #ffffff;
   font-weight: bold;
 }
-
 .celda-reservada small {
   display: block;
   margin-top: 0.25rem;
   color: rgba(255, 255, 255, 0.85);
   font-weight: normal;
   font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 📱 Teléfonos pequeños (hasta 480px) */
@@ -136,41 +141,28 @@
     align-items: stretch;
     gap: 1rem;
   }
-
   .acciones-derecha-aulas {
     flex-direction: column;
     align-items: stretch;
     gap: 0.8rem;
   }
-
   .btn-volver-panel,
   .btn-ver-disponibilidad,
   .wrapper-select-aulas select {
     width: 100%;
   }
-
   .titulo-matriz-aulas {
     font-size: 1.5rem !important;
     margin-top: 2rem;
   }
-
   .matriz-disponibilidad-aulas th,
   .matriz-disponibilidad-aulas td {
     padding: 0.4rem;
     font-size: 0.75rem;
   }
-
-  .hora-etiqueta {
-    font-size: 0.8rem;
-  }
-
-  .celda-reservada div {
-    font-size: 0.75rem;
-  }
-
-  .celda-reservada small {
-    font-size: 0.7rem;
-  }
+  .hora-etiqueta { font-size: 0.8rem; }
+  .celda-reservada div { font-size: 0.75rem; }
+  .celda-reservada small { font-size: 0.7rem; }
 }
 
 /* 📱 Teléfonos medianos (481px - 767px) */
@@ -180,12 +172,10 @@
     align-items: flex-start;
     gap: 1rem;
   }
-
   .acciones-derecha-aulas {
     flex-direction: column;
     align-items: stretch;
   }
-
   .btn-volver-panel,
   .btn-ver-disponibilidad,
   .wrapper-select-aulas select {
@@ -195,30 +185,18 @@
 
 /* 📱📲 Tablets y pantallas medianas (768px - 1024px) */
 @media (max-width: 1024px) {
-
   .matriz-disponibilidad-aulas th,
   .matriz-disponibilidad-aulas td {
     padding: 0.5rem;
     font-size: 0.85rem;
   }
-
-  .titulo-matriz-aulas {
-    font-size: 1.8rem !important;
-  }
+  .titulo-matriz-aulas { font-size: 1.8rem !important; }
 }
 
 /* 🖥️ Pantallas grandes (más de 1920px) */
 @media (min-width: 1921px) {
-  .matriz-disponibilidad-aulas {
-    font-size: 1.05rem;
-  }
-
+  .matriz-disponibilidad-aulas { font-size: 1.05rem; }
   .matriz-disponibilidad-aulas th,
-  .matriz-disponibilidad-aulas td {
-    padding: 1rem;
-  }
-
-  .titulo-matriz-aulas {
-    font-size: 2.5rem !important;
-  }
+  .matriz-disponibilidad-aulas td { padding: 1rem; }
+  .titulo-matriz-aulas { font-size: 2.5rem !important; }
 }

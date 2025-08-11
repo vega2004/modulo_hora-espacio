@@ -539,3 +539,60 @@ html {
     padding: 6px 10px;
   }
 }
+
+:root {
+  --brand: #841816;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--brand);
+  color: #fff;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.site-footer a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.site-footer a:hover {
+  opacity: 0.8;
+  border-bottom-color: #fff;
+}
+
+.site-footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-footer p {
+  margin: 0.3rem 0;
+}
+
+.site-footer small {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+/* Sticky Footer Layout */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}

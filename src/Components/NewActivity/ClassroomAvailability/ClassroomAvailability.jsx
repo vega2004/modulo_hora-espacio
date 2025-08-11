@@ -88,25 +88,34 @@ const ClassroomAvailability = () => {
 
         const clase = horarios.find(h => {
             if (!h || !h.dia || !h.horaInicio || !h.horaFin) return false;
-
             return (
                 normalizarTexto(h.dia) === normalizarTexto(dia) &&
                 estaDentroDelRango(slotInicio, slotFin, h.horaInicio, h.horaFin)
             );
         });
 
+        if (clase) {
+            const titulo = `${clase.asignatura ?? ''} — ${clase.profesor ?? ''}`;
+            return (
+                <td
+                    key={`${dia}-${hora}`}
+                    className="celda-reservada"
+                    title={titulo}
+                >
+                    <div>{clase.asignatura}</div>
+                    <small>{clase.profesor}</small>
+                </td>
+            );
+        }
+
         return (
-            <td key={`${dia}-${hora}`} className={clase ? 'celda-reservada' : 'celda-disponible'}>
-                {clase && (
-                    <>
-                        <div>{clase.asignatura}</div>
-                        <small>{clase.profesor}</small>
-                    </>
-                )}
-            </td>
+            <td
+                key={`${dia}-${hora}`}
+                className="celda-disponible"
+                title="Disponible"
+            />
         );
     };
-
 
     const irAVistaGeneral = () => {
         navigate(`/BuildingAvailabilityMatrix?edificio=${edificio}`);
@@ -145,24 +154,24 @@ const ClassroomAvailability = () => {
             </div>
 
             {aulaSeleccionada && (
-                <table className="matriz-disponibilidad-aulas">
-                    <thead>
-                        <tr>
-                            <th>Hora</th>
-                            {DIAS.map((dia) => (
-                                <th key={dia}>{dia}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {HORAS.map((hora) => (
-                            <tr key={hora}>
-                                <td className="hora-etiqueta">{hora}</td>
-                                {DIAS.map((dia) => renderCelda(dia, hora))}
+                <div className="tabla-scroll-x">
+                    <table className="matriz-disponibilidad-aulas">
+                        <thead>
+                            <tr>
+                                <th className="hora-sticky">Hora</th>
+                                {DIAS.map((dia) => <th key={dia}>{dia}</th>)}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {HORAS.map((hora) => (
+                                <tr key={hora}>
+                                    <td className="hora-etiqueta hora-sticky">{hora}</td>
+                                    {DIAS.map((dia) => renderCelda(dia, hora))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     );

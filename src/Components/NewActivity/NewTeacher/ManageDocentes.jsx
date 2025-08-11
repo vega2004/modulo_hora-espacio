@@ -7,6 +7,7 @@ const ManageDocentes = () => {
   const [docentes, setDocentes] = useState([]);
   const [form, setForm] = useState({ nombre: '', apPaterno: '', apMaterno: '' });
   const [busqueda, setBusqueda] = useState('');
+  const [campoBusqueda, setCampoBusqueda] = useState('');
   const [editandoId, setEditandoId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [paginaActual, setPaginaActual] = useState(1);
@@ -29,11 +30,28 @@ const ManageDocentes = () => {
     }
   };
 
-  const buscarDocentePorNombre = async (nombre) => {
+  const buscarDocentes = async () => {
+    if (busqueda.trim() === '') {
+      cargarDocentes();
+      return;
+    }
+
     try {
-      const res = await fetch(`https://localhost:7101/api/Profesores/obtenerProfesores/${encodeURIComponent(nombre)}`, { headers });
+      const res = await fetch(`https://localhost:7101/api/Profesores/obtenerProfesores/${encodeURIComponent(busqueda)}`, { headers });
       const data = await res.json();
-      setDocentes(data);
+
+      if (campoBusqueda === '*' || campoBusqueda === '') {
+        // Búsqueda global
+        setDocentes(data);
+      } else {
+        // Filtro por campo específico
+        const filtrados = data.filter((doc) => {
+          const valor = doc[campoBusqueda]?.toLowerCase() || '';
+          return valor.includes(busqueda.toLowerCase());
+        });
+        setDocentes(filtrados);
+      }
+
       setPaginaActual(1);
     } catch (err) {
       console.error(err);
@@ -145,16 +163,32 @@ const ManageDocentes = () => {
       </form>
 
       <div className="barra-busqueda">
+        <select
+          value={campoBusqueda}
+          onChange={(e) => setCampoBusqueda(e.target.value)}
+          className="select-campo-busqueda"
+        >
+          <option value="" disabled>Filtrar por...</option>
+          <option value="*">Todos los campos</option>
+          <option value="nombre">Nombre</option>
+          <option value="apPaterno">Apellido Paterno</option>
+          <option value="apMaterno">Apellido Materno</option>
+        </select>
+
+
+
         <input
           type="text"
-          placeholder="Buscar docente..."
+          placeholder={`Buscar por ${campoBusqueda || 'todos los campos'}...`}
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <button onClick={() => buscarDocentePorNombre(busqueda)}>
+
+        <button onClick={buscarDocentes} disabled={!busqueda.trim()}>
           <FaSearch style={{ marginRight: '6px' }} />
           Buscar
         </button>
+
       </div>
 
       <table className="tabla-docentes">

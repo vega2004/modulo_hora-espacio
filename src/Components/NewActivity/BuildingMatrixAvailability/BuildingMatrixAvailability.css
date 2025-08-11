@@ -1,6 +1,17 @@
-/* 🏢 Estilo para matriz de aulas por edificio */
 
-/* 📦 Contenedor principal */
+/* 🏢 Matriz de aulas por edificio — CSS listo para muchas aulas, móviles y texto largo */
+
+/* ===== Variables de color (opcional) ===== */
+:root{
+  --brand:#841816;
+  --free-bg:#edf2f7;
+  --busy-bg:#9b1c1c;
+  --busy-hover:#7e1717;
+  --hour-bg:#f0f0f0;
+  --grid-border:#ebebeb;
+}
+
+/* ===== Contenedor principal ===== */
 .wrapper-matriz-edificio {
   max-width: 95%;
   margin: 3rem auto 2rem;
@@ -11,26 +22,17 @@
   font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
 }
 
-.h2 {
-  font-size: 2.1rem !important;
-  font-weight: 700;
-  color: #841816;
+/* Título (usa la clase .h2 del JSX) */
+.wrapper-matriz-edificio .h2 {
   text-align: center;
-  margin: 4rem 0 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: clamp(1.6rem, 2.2vw + 1rem, 2.6rem);
+  color: var(--brand);
+  font-weight: 800;
+  margin: 2rem 0 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
-/* 📅 Título */
-.wrapper-matriz-edificio h2 {
-  text-align: center;
-  font-size: 2.3rem;
-  color: #1e293b;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
-  margin-top: 1.5rem;
-}
-
-/* 🔹 Controles de selección */
+/* ===== Controles ===== */
 .controles-edificio-select {
   display: flex;
   justify-content: flex-start;
@@ -47,19 +49,28 @@
   border-radius: 8px;
   border: 1.5px solid #ccc;
   background-color: #e2e8f0;
-  transition: all 0.25s ease-in-out;
+  transition: box-shadow 0.25s ease-in-out, border-color 0.25s ease-in-out;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.controles-edificio-select select:focus {
-  border-color: #841816;
+.controles-edificio-select select:focus,
+.controles-edificio-select select:focus-visible {
+  border-color: var(--brand);
   outline: none;
   box-shadow: 0 0 0 4px rgba(132, 24, 22, 0.15);
 }
 
-/* 📊 Tabla de disponibilidad por edificio */
-.matriz-edificio-disponibilidad {
+/* ===== Scroll horizontal para muchas aulas ===== */
+.tabla-scroll-x {
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== Tabla ===== */
+.matriz-edificio-disponibilidad {
+  min-width: 1200px; /* o más, según el mínimo de columnas que quieras visibles sin scroll */
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 1rem;
@@ -67,10 +78,14 @@
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   overflow: hidden;
+  table-layout: fixed; /* importante para elipsis */
 }
 
-.matriz-edificio-disponibilidad th {
-  background: #841816;
+.matriz-edificio-disponibilidad thead th {
+  position: sticky;       /* encabezados pegajosos */
+  top: 0;
+  z-index: 3;
+  background: var(--brand);
   color: #ffffff;
   padding: 0.75rem 0.5rem;
   text-align: center;
@@ -79,6 +94,11 @@
   text-transform: uppercase;
   letter-spacing: 0.4px;
   border-right: 1px solid #b64a4a;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+   min-width: 110px; 
+  max-width: 220px;
 }
 
 .matriz-edificio-disponibilidad td {
@@ -86,38 +106,48 @@
   vertical-align: middle;
   text-align: center;
   min-width: 110px;
-  border-right: 1px solid #ebebeb;
-  border-bottom: 1px solid #ebebeb;
+  border-right: 1px solid var(--grid-border);
+  border-bottom: 1px solid var(--grid-border);
   transition: background-color 0.2s ease;
+  overflow: hidden;         /* necesario para elipsis/word-break */
 }
 
-/* ⏰ Celdas de hora */
+/* Primera columna (Hora) pegajosa */
+.hora-sticky {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: var(--hour-bg);
+  box-shadow: 2px 0 6px rgba(0,0,0,0.06);
+}
+
+/* Columna Hora */
 .matriz-edificio-disponibilidad .hora-columna {
-  background-color: #f0f0f0;
+  background-color: var(--hour-bg);
   font-weight: 600;
   color: #444;
   border-right: 2px solid #ccc;
+  white-space: nowrap;
 }
 
-/* ✅ Disponibles */
+/* Celdas libres/ocupadas */
 .celda-edificio-libre {
-  background-color: #edf2f7;
+  background-color: var(--free-bg);
   color: #2e7d32;
   font-weight: 500;
   border-left: 3px solid #a6e2cd;
 }
 
-/* ❌ Ocupadas */
 .celda-edificio-ocupada {
-  background-color: #9b1c1c;
+  background-color: var(--busy-bg);
   color: #ffffff;
   font-weight: 600;
   line-height: 1.2;
   border-left: 3px solid #f4aaaa;
 }
 
-.matriz-edificio-disponibilidad td:hover:not(.hora-columna) {
-  background-color: #5a0d0c;
+.celda-edificio-ocupada div {
+  word-break: break-word; /* por si asignatura/profesor son largos */
 }
 
 .celda-edificio-ocupada div small {
@@ -125,15 +155,27 @@
   margin-top: 4px;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.85);
-  /* Blanco suave */
 }
 
-/* 🧾 Alternancia de filas */
-.matriz-edificio-disponibilidad tbody tr:nth-child(even) {
+/* Hover */
+.celda-edificio-libre:hover {
+  background-color: #dbe8f2;
+}
+.celda-edificio-ocupada:hover {
+  background-color: var(--busy-hover);
+}
+.matriz-edificio-disponibilidad td.hora-columna:hover {
+  background-color: var(--hour-bg);
+}
+
+/* Alternancia de filas (suave; no pisa colores de celdas) */
+.matriz-edificio-disponibilidad tbody tr:nth-child(even) td:not(.hora-columna):not(.celda-edificio-ocupada):not(.celda-edificio-libre) {
   background-color: #fcfcfc;
 }
 
-/* 📱 Teléfonos pequeños (hasta 480px) */
+/* ===== Responsivo ===== */
+
+/* Teléfonos pequeños (<=480px) */
 @media (max-width: 480px) {
   .wrapper-matriz-edificio {
     padding: 1rem;
@@ -151,7 +193,7 @@
     font-size: 0.95rem;
   }
 
-  .wrapper-matriz-edificio h2 {
+  .wrapper-matriz-edificio .h2 {
     font-size: 1.6rem;
     margin-top: 1.5rem;
   }
@@ -163,60 +205,51 @@
     min-width: 80px;
   }
 
-  .celda-edificio-ocupada div {
-    font-size: 0.75rem;
-  }
-
-  .celda-edificio-ocupada div small {
-    font-size: 0.65rem;
-  }
+  .celda-edificio-ocupada div { font-size: 0.75rem; }
+  .celda-edificio-ocupada div small { font-size: 0.65rem; }
 }
 
-/* 📱 Teléfonos medianos (481px - 767px) */
+/* Teléfonos medianos (481px - 767px) */
 @media (max-width: 767px) {
   .controles-edificio-select {
     flex-direction: column;
     align-items: stretch;
   }
-
   .controles-edificio-select select {
     width: 100%;
   }
-
-  .wrapper-matriz-edificio h2 {
-    font-size: 1.9rem;
-  }
 }
 
-/* 📱 Tablets y pantallas medianas (768px - 1024px) */
+/* Tablets y pantallas medianas (768px - 1024px) */
 @media (max-width: 1024px) {
   .matriz-edificio-disponibilidad th,
   .matriz-edificio-disponibilidad td {
     padding: 0.6rem;
     font-size: 0.85rem;
-  }
-
-  .wrapper-matriz-edificio h2 {
-    font-size: 2.1rem;
+    min-width: 96px;
   }
 }
 
-/* 🖥️ Pantallas muy grandes (más de 1920px) */
+/* Compactar cuando hay muchísimas columnas */
+@media (max-width: 1200px) {
+  .matriz-edificio-disponibilidad th,
+  .matriz-edificio-disponibilidad td {
+    min-width: 96px;
+  }
+}
+
+/* Pantallas muy grandes (>=1921px) */
 @media (min-width: 1921px) {
-  .wrapper-matriz-edificio {
-    max-width: 80%;
-  }
-
-  .matriz-edificio-disponibilidad {
-    font-size: 1.05rem;
-  }
-
+  .wrapper-matriz-edificio { max-width: 80%; }
+  .matriz-edificio-disponibilidad { font-size: 1.05rem; }
   .matriz-edificio-disponibilidad th,
   .matriz-edificio-disponibilidad td {
     padding: 1rem;
+    max-width: 260px;
   }
+}
 
-  .wrapper-matriz-edificio h2 {
-    font-size: 2.6rem;
-  }
+/* Accesibilidad: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }

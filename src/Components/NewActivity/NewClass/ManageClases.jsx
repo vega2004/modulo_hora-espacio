@@ -24,6 +24,7 @@ const ManageClases = () => {
     aulas: [],
     dias: []
   });
+  const [campoBusqueda, setCampoBusqueda] = useState('todos');
 
   const [clases, setClases] = useState([]);
   const [editandoId, setEditandoId] = useState(null);
@@ -87,28 +88,49 @@ const ManageClases = () => {
 
   const buscarClases = async () => {
     try {
-      if (busqueda.trim() === '') {
+      if (!busqueda.trim()) {
         await cargarClases();
         return;
       }
 
-      const campos = [
-        'nombreCurso', 'nombreProfesor', 'dia', 'grupo',
-        'carrera', 'aula', 'horaInicio', 'horaFin', 'grado', 'capacidad'
-      ];
-
       let resultadosTotales = [];
 
-      for (let campo of campos) {
+      if (campoBusqueda === 'todos') {
+        const campos = [
+          'nombreCurso', 'nombreProfesor', 'dia', 'grupo',
+          'carrera', 'aula', 'horaInicio', 'horaFin', 'grado', 'capacidad'
+        ];
+
+        for (let campo of campos) {
+          const body = {};
+
+          if (['grado', 'capacidad'].includes(campo)) {
+            const numero = parseInt(busqueda);
+            if (!isNaN(numero)) body[campo] = numero;
+          } else {
+            body[campo] = busqueda.trim();
+          }
+
+          const res = await fetch('https://localhost:7101/api/Clases/filtrar', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body)
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            const resultado = Array.isArray(data) ? data : data.resultado || [];
+            resultadosTotales = [...resultadosTotales, ...resultado];
+          }
+        }
+      } else {
         const body = {};
 
-        if (['grado', 'capacidad'].includes(campo)) {
+        if (['grado', 'capacidad'].includes(campoBusqueda)) {
           const numero = parseInt(busqueda);
-          if (!isNaN(numero)) {
-            body[campo] = numero;
-          }
+          if (!isNaN(numero)) body[campoBusqueda] = numero;
         } else {
-          body[campo] = busqueda.trim();
+          body[campoBusqueda] = busqueda.trim();
         }
 
         const res = await fetch('https://localhost:7101/api/Clases/filtrar', {
@@ -119,8 +141,7 @@ const ManageClases = () => {
 
         if (res.ok) {
           const data = await res.json();
-          const resultado = Array.isArray(data) ? data : data.resultado || [];
-          resultadosTotales = [...resultadosTotales, ...resultado];
+          resultadosTotales = Array.isArray(data) ? data : data.resultado || [];
         }
       }
 
@@ -134,17 +155,14 @@ const ManageClases = () => {
         document.querySelector('.tabla-clases')?.scrollIntoView({ behavior: 'smooth' });
       } else {
         setClases([]);
-        Swal.fire({
-          icon: 'info',
-          title: 'Sin resultados',
-          text: 'No se encontraron clases con ese término.'
-        });
+        Swal.fire({ icon: 'info', title: 'Sin resultados', text: 'No se encontraron clases.' });
       }
     } catch (err) {
       console.error('Error en búsqueda:', err);
       Swal.fire({ icon: 'error', title: 'Error', text: 'Falló la búsqueda.' });
     }
   };
+
 
   useEffect(() => {
     cargarOpciones();
@@ -354,16 +372,34 @@ const ManageClases = () => {
         </div>
       </form>
 
-
       <div className="barra-busqueda">
+        <select
+          value={campoBusqueda}
+          onChange={(e) => setCampoBusqueda(e.target.value)}
+          className="select-campo-busqueda"
+        >
+          <option value="">Filtrar por...</option>
+          <option value="todos">Todos los campos</option>
+          <option value="nombreCurso">Curso</option>
+          <option value="nombreProfesor">Profesor</option>
+          <option value="grupo">Grupo</option>
+          <option value="carrera">Carrera</option>
+          <option value="aula">Aula</option>
+          <option value="dia">Día</option>
+          <option value="horaInicio">Hora Inicio</option>
+          <option value="horaFin">Hora Fin</option>
+          <option value="grado">Semestre</option>
+          <option value="capacidad">Capacidad</option>
+        </select>
         <input
-          type="text"
-          placeholder="Buscar ..."
+          type={['grado', 'capacidad'].includes(campoBusqueda) ? 'number' : 'text'}
+          placeholder={campoBusqueda === 'todos' ? 'Buscar en todos los campos' : `Buscar por ${campoBusqueda}`}
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <button onClick={buscarClases}>
-          <FaSearch />
+        <button onClick={buscarClases} disabled={!busqueda.trim()}>
+
+          <FaSearch style={{ marginRight: '6px' }} />
           Buscar
         </button>
       </div>
@@ -375,6 +411,7 @@ const ManageClases = () => {
             <th>Profesor</th>
             <th>Asignatura</th>
             <th>Grupo</th>
+            <th>Semestre</th>
             <th>Aula</th>
             <th>Día</th>
             <th>Hora Inicio</th>
@@ -388,6 +425,7 @@ const ManageClases = () => {
               <td>{clase.profesor}</td>
               <td>{clase.nombreCurso}</td>
               <td>{clase.grupo}</td>
+              <td>{clase.grado}</td> {/* ← nuevo */}
               <td>{clase.aula}</td>
               <td>{clase.dia}</td>
               <td>{clase.horaInicio}</td>

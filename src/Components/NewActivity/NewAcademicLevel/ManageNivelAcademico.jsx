@@ -10,6 +10,8 @@ const ManageNivelAcademico = () => {
   const [niveles, setNiveles] = useState([]);
   const [form, setForm] = useState({ tipo: '', grado: '', grupo: '', carrera: '' });
   const [busqueda, setBusqueda] = useState('');
+  const [grupoComoInput, setGrupoComoInput] = useState(false);
+  const [campoBusqueda, setCampoBusqueda] = useState('');
   const [editandoId, setEditandoId] = useState(null);
   const [customTipo, setCustomTipo] = useState(false);
   const [customCarrera, setCustomCarrera] = useState(false);
@@ -34,16 +36,36 @@ const ManageNivelAcademico = () => {
     }
   };
 
-  const buscarNiveles = async (filtro) => {
+  const buscarNiveles = async () => {
+    if (busqueda.trim() === '') {
+      cargarNiveles();
+      return;
+    }
+
     try {
-      const res = await fetch(`https://localhost:7101/api/NivelAcademico/obtenerNivelAcademico/${encodeURIComponent(filtro)}`, { headers });
+      const res = await fetch(`https://localhost:7101/api/NivelAcademico/obtenerNivelAcademico/${encodeURIComponent(busqueda)}`, {
+        headers
+      });
+
       const data = await res.json();
-      setNiveles(data);
+
+      // Si es búsqueda global (por todos los campos)
+      if (!campoBusqueda || campoBusqueda === '*') {
+        setNiveles(data);
+      } else {
+        const filtrado = data.filter(n => {
+          const valor = n[campoBusqueda]?.toString().toLowerCase() || '';
+          return valor.includes(busqueda.toLowerCase());
+        });
+        setNiveles(filtrado);
+      }
+
       setPaginaActual(1);
     } catch (error) {
       console.error('Error en la búsqueda:', error);
     }
   };
+
 
   useEffect(() => {
     if (busqueda.trim() === '') {
@@ -112,6 +134,7 @@ const ManageNivelAcademico = () => {
       setCustomTipo(false);
       setCustomCarrera(false);
       setEditandoId(null);
+      setGrupoComoInput(false);
       cargarNiveles();
     } catch (err) {
       Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudo guardar el nivel académico.' });
@@ -130,6 +153,17 @@ const ManageNivelAcademico = () => {
     setEditandoId(nivel.id);
     setCustomTipo(!TIPOS_BASE.includes(nivel.tipo));
     setCustomCarrera(!CARRERAS_BASE.includes(nivel.carrera));
+
+    // Determinar si el grupo debe mostrarse como input
+    if (
+      (nivel.tipo === 'Licenciatura' && !['1', '2'].includes(nivel.grupo)) ||
+      (nivel.tipo === 'Bachillerato' && !(parseInt(nivel.grupo) >= 1 && parseInt(nivel.grupo) <= 12)) ||
+      (!['Licenciatura', 'Bachillerato'].includes(nivel.tipo))
+    ) {
+      setGrupoComoInput(true);
+    } else {
+      setGrupoComoInput(false);
+    }
   };
 
   const handleEliminar = async (nivel) => {
@@ -161,7 +195,7 @@ const ManageNivelAcademico = () => {
 
   return (
     <div className="manage-nivel-academico-container">
-      <h2>Gestionar Nivel Académico</h2>
+      <h2>GESTIONAR NIVEL ACADÉMICO</h2>
 
       <form onSubmit={handleSubmit} className="form-nivel-academico">
         {customTipo ? (
@@ -174,9 +208,105 @@ const ManageNivelAcademico = () => {
           </select>
         )}
 
-        <input type="number" name="grado" placeholder="Grado" value={form.grado} onChange={handleChange} required min={1} />
-        <input type="text" name="grupo" placeholder="Grupo" value={form.grupo} onChange={handleChange} required />
+        {form.tipo === 'Bachillerato' ? (
+          <select name="grado" value={form.grado} onChange={handleChange} required>
+            <option value="">Seleccione grado...</option>
+            {[...Array(6)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>{i + 1}</option>
+            ))}
+          </select>
+        ) : form.tipo === 'Licenciatura' ? (
+          <select name="grado" value={form.grado} onChange={handleChange} required>
+            <option value="">Seleccione semestre...</option>
+            {[...Array(9)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>{i + 1}</option>
+            ))}
+          </select>
+        ) : (
+          <input
+            type="number"
+            name="grado"
+            placeholder="Semestre"
+            value={form.grado}
+            onChange={handleChange}
+            required
+            min={1}
+          />
+        )}
 
+        {form.tipo === 'Licenciatura' ? (
+          grupoComoInput ? (
+            <input
+              type="text"
+              name="grupo"
+              placeholder="Grupo"
+              value={form.grupo}
+              onChange={handleChange}
+              required
+            />
+          ) : (
+            <select
+              name="grupo"
+              value={form.grupo}
+              onChange={(e) => {
+                if (e.target.value === 'otros') {
+                  setGrupoComoInput(true);
+                  setForm(prev => ({ ...prev, grupo: '' }));
+                } else {
+                  setGrupoComoInput(false);
+                  handleChange(e);
+                }
+              }}
+              required
+            >
+              <option value="">Seleccione grupo...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="otros">Otros...</option>
+            </select>
+          )
+        ) : form.tipo === 'Bachillerato' ? (
+          grupoComoInput ? (
+            <input
+              type="text"
+              name="grupo"
+              placeholder="Grupo"
+              value={form.grupo}
+              onChange={handleChange}
+              required
+            />
+          ) : (
+            <select
+              name="grupo"
+              value={form.grupo}
+              onChange={(e) => {
+                if (e.target.value === 'otros') {
+                  setGrupoComoInput(true);
+                  setForm(prev => ({ ...prev, grupo: '' }));
+                } else {
+                  setGrupoComoInput(false);
+                  handleChange(e);
+                }
+              }}
+              required
+            >
+              <option value="">Seleccione grupo...</option>
+              {[...Array(12)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
+              ))}
+              <option value="otros">Otros...</option>
+            </select>
+          )
+        ) : (
+          <input
+            type="text"
+            name="grupo"
+            placeholder="Grupo"
+            value={form.grupo}
+            onChange={handleChange}
+            required
+          />
+        )}
         {customCarrera ? (
           <input type="text" name="carrera" placeholder="Carrera..." value={form.carrera} onChange={handleChange} required />
         ) : (
@@ -205,14 +335,29 @@ const ManageNivelAcademico = () => {
       </form>
 
       <div className="barra-busqueda">
+        <select
+          value={campoBusqueda}
+          onChange={(e) => setCampoBusqueda(e.target.value)}
+          className="select-campo-busqueda"
+        >
+          <option value="" disabled>Filtrar por...</option>
+          <option value="*">Todos los campos</option>
+          <option value="tipo">Tipo</option>
+          <option value="grado">Grado</option>
+          <option value="grupo">Grupo</option>
+          <option value="carrera">Carrera</option>
+        </select>
+
         <input
-          type="text"
-          placeholder="Buscar nivel académico..."
+          type={campoBusqueda === 'grado' ? 'number' : 'text'}
+          placeholder={`Buscar por ${campoBusqueda === '*' || campoBusqueda === '' ? 'todos los campos' : campoBusqueda}...`}
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
+          min={campoBusqueda === 'grado' ? 1 : undefined}
         />
-        <button onClick={() => buscarNiveles(busqueda)}>
-          <FaSearch />
+
+        <button onClick={buscarNiveles} disabled={!busqueda.trim()}>
+          <FaSearch style={{ marginRight: '6px' }} />
           Buscar
         </button>
       </div>
@@ -221,7 +366,7 @@ const ManageNivelAcademico = () => {
         <thead>
           <tr>
             <th>Tipo</th>
-            <th>Grado</th>
+            <th>Semestre</th>
             <th>Grupo</th>
             <th>Carrera</th>
             <th>Acciones</th>

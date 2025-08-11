@@ -49,6 +49,29 @@
   box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
 }
 
+.form-nueva-asignatura input,
+.form-nueva-asignatura select {
+  flex: 1 1 28%;
+  padding: 0.65rem 1rem;
+  min-width: 200px;
+  max-width: 250px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #e2e8f0;
+  color: #1a202c;
+  transition: border-color 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.form-nueva-asignatura input:focus,
+.form-nueva-asignatura select:focus {
+  outline: none;
+  border-color: #841816;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+}
+
+
 /* 🎯 Botón guardar */
 .form-nueva-asignatura button {
   padding: 0.65rem 1.4rem;

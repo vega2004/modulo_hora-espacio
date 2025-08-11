@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import './ManageAsignaturas.css';
-
 import { FaPlus, FaEdit, FaSearch } from 'react-icons/fa';
+
 const ManageAsignaturas = () => {
+  const [periodo, setPeriodo] = useState('');
+  const periodosPredefinidos = ['Enero - Junio', 'Julio - Diciembre'];
   const [asignaturas, setAsignaturas] = useState([]);
   const [nombre, setNombre] = useState('');
   const [busqueda, setBusqueda] = useState('');
@@ -62,7 +64,10 @@ const ManageAsignaturas = () => {
       const res = await fetch(url, {
         method,
         headers,
-        body: JSON.stringify({ nombre })
+        body: JSON.stringify({
+          nombre,
+          periodo
+        })
       });
 
       if (!res.ok) throw new Error('Error en la operación');
@@ -75,6 +80,7 @@ const ManageAsignaturas = () => {
       });
 
       setNombre('');
+      setPeriodo('');
       setEditandoId(null);
       cargarAsignaturas();
     } catch (error) {
@@ -87,6 +93,7 @@ const ManageAsignaturas = () => {
 
   const handleEditar = (asignatura) => {
     setNombre(asignatura.nombre);
+    setPeriodo(asignatura.periodo);
     setEditandoId(asignatura.id);
   };
 
@@ -149,6 +156,17 @@ const ManageAsignaturas = () => {
           ))}
         </datalist>
 
+        <select
+          value={periodo}
+          onChange={(e) => setPeriodo(e.target.value)}
+          required
+        >
+          <option value="">Selecciona un periodo</option>
+          {periodosPredefinidos.map((p, index) => (
+            <option key={index} value={p}>{p}</option>
+          ))}
+        </select>
+
         <button type="submit" disabled={loading}>
           {loading ? 'Guardando...' : editandoId ? (
             <>
@@ -162,7 +180,7 @@ const ManageAsignaturas = () => {
         </button>
       </form>
 
-      {/* 🔍 Barra de búsqueda alineada a la izquierda y antes de la tabla */}
+      {/* 🔍 Barra de búsqueda */}
       <div className="barra-busqueda">
         <input
           type="text"
@@ -171,18 +189,15 @@ const ManageAsignaturas = () => {
           onChange={(e) => setBusqueda(e.target.value)}
         />
         <button type="button" onClick={() => buscarAsignaturasPorNombre(busqueda)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path fill="currentColor" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l4.39 4.38-1.4 1.42-4.4-4.39zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
-          </svg>
-          Buscar
+          <FaSearch />
         </button>
       </div>
-
 
       <table className="tabla-asignaturas">
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Periodo</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -190,6 +205,7 @@ const ManageAsignaturas = () => {
           {asignaturasPaginadas.map(a => (
             <tr key={a.id}>
               <td>{a.nombre}</td>
+              <td>{a.periodo}</td>
               <td>
                 <button className="btn-editar" onClick={() => handleEditar(a)}>Editar</button>
                 <button className="btn-eliminar" onClick={() => handleEliminar(a.nombre)}>Eliminar</button>
@@ -198,7 +214,7 @@ const ManageAsignaturas = () => {
           ))}
           {asignaturasPaginadas.length === 0 && (
             <tr>
-              <td colSpan="2" style={{ textAlign: 'center', color: '#999' }}>
+              <td colSpan="3" style={{ textAlign: 'center', color: '#999' }}>
                 No se encontraron asignaturas.
               </td>
             </tr>

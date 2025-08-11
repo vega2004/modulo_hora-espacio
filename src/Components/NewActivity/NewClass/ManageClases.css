@@ -1,7 +1,7 @@
 /* Contenedor principal */
 .manage-clases-container {
   padding: 2rem;
-  max-width: 1200px;
+  max-width: auto;
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
   background-color: #f7f9fb;
@@ -98,10 +98,54 @@
   border-collapse: collapse;
   background-color: #ffffff;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   font-size: 0.95rem;
   text-align: center;
+  table-layout: auto;
+}
+
+/* Mejora visual tabla para evitar salto de línea y mantener columnas uniformes */
+.tabla-clases thead th,
+.tabla-clases tbody td {
+  white-space: nowrap;
+  /* evita que el texto se divida en varias líneas */
+  vertical-align: middle;
+  /* centra verticalmente el contenido */
+  text-align: center;
+}
+
+/* Establecer ancho mínimo a cada columna para mantener formato limpio */
+.tabla-clases th:nth-child(1),
+/* Profesor */
+.tabla-clases td:nth-child(1) {
+  min-width: 180px;
+}
+
+.tabla-clases th:nth-child(2),
+/* Asignatura */
+.tabla-clases td:nth-child(2) {
+  min-width: 160px;
+}
+
+.tabla-clases th:nth-child(6),
+/* Día */
+.tabla-clases td:nth-child(6) {
+  min-width: 90px;
+}
+
+.tabla-clases th:nth-child(7),
+/* Hora inicio */
+.tabla-clases td:nth-child(7),
+.tabla-clases th:nth-child(8),
+/* Hora fin */
+.tabla-clases td:nth-child(8) {
+  min-width: 80px;
+}
+
+/* Asegurar tabla scroll horizontal si es necesario */
+.tabla-clases {
+  overflow-x: auto;
 }
 
 .tabla-clases thead {
@@ -119,6 +163,8 @@
   padding: 0.9rem;
   border-bottom: 1px solid #e5e7eb;
   color: #1a202c;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .tabla-clases tbody tr:nth-child(even) {

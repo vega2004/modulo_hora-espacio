@@ -167,7 +167,9 @@ const ManageAulas = () => {
 
       <div className="barra-busqueda-aula">
         <input type="text" placeholder="Buscar aula..." value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-        <button onClick={() => buscarAulas(busqueda)}><i className="fas fa-search"></i> Buscar</button>
+        <button onClick={() => buscarAulas(busqueda)}>
+          <FaSearch/> Buscar
+        </button>
       </div>
 
       <table className="tabla-aulas">

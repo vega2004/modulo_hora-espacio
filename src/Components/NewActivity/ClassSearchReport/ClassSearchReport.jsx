@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ClassSearchReport.css';
 import Swal from 'sweetalert2';
+import { FaSearch } from 'react-icons/fa';
 
 const ClasssearchReport = () => {
     const [filtros, setFiltros] = useState({
@@ -66,7 +67,6 @@ const ClasssearchReport = () => {
 
     const obtenerTodasLasClases = async () => {
         setLoading(true);
-        setBusquedaRealizada(false);
         try {
             const token = localStorage.getItem('authToken');
             const response = await fetch('https://localhost:7101/api/Clases/consultar/general', {
@@ -78,13 +78,25 @@ const ClasssearchReport = () => {
                 body: JSON.stringify({})
             });
 
-            if (!response.ok) throw new Error('Error al cargar todas las clases');
+            if (response.status === 404) {
+                setClases([]);
+                return; // no marcar como búsqueda realizada aquí
+            }
+
+            if (!response.ok) throw new Error('Error real del servidor');
+
             const data = await response.json();
             setClases(data);
         } catch (error) {
             console.error('Error al obtener todas las clases:', error);
-            alert('Hubo un error al cargar todas las clases.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error al cargar las clases.',
+                confirmButtonColor: '#d33'
+            });
         } finally {
+            setBusquedaRealizada(false); // ❗ importante: esta es carga inicial, no es búsqueda
             setLoading(false);
         }
     };
@@ -250,8 +262,14 @@ const ClasssearchReport = () => {
                 </select>
 
                 <button className="btn-buscar" onClick={handleBuscar} disabled={loading}>
-                    {loading ? 'Buscando...' : 'Buscar'}
+                    {loading ? 'Buscando...' : (
+                        <>
+                            <FaSearch style={{ marginRight: '6px' }} />
+                            Buscar
+                        </>
+                    )}
                 </button>
+
             </div>
 
             <div className="tabla-resultados">
@@ -265,7 +283,7 @@ const ClasssearchReport = () => {
                             <th>Profesor</th>
                             <th>Aula</th>
                             <th>Capacidad</th>
-                            <th>Grado</th>
+                            <th>Semestre</th>
                             <th>Grupo</th>
                             <th>Carrera</th>
                         </tr>
@@ -273,7 +291,7 @@ const ClasssearchReport = () => {
                     <tbody>
                         {(clases.length === 0 && busquedaRealizada) ? (
                             <tr className="no-results-row">
-                                <td colSpan="9">
+                                <td colSpan="10">
                                     <div className="no-results-message">
                                         <img src="https://cdn-icons-png.flaticon.com/512/751/751463.png"
                                             alt="No resultados"
@@ -281,6 +299,19 @@ const ClasssearchReport = () => {
                                             style={{ width: '64px', marginBottom: '10px' }}
                                         />
                                         <p>No se encontraron clases que coincidan con los criterios ingresados.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : (clases.length === 0 && !busquedaRealizada) ? (
+                            <tr className="no-results-row">
+                                <td colSpan="10">
+                                    <div className="no-results-message">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/751/751463.png"
+                                            alt="Sin clases registradas"
+                                            className="no-results-icon"
+                                            style={{ width: '64px', marginBottom: '10px' }}
+                                        />
+                                        <p>Aún no hay clases registradas en el sistema.</p>
                                     </div>
                                 </td>
                             </tr>

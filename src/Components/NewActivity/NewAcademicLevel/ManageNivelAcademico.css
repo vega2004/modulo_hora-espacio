@@ -116,6 +116,23 @@
   fill: white;
 }
 
+.select-campo-busqueda {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  color: #1a202c;
+  min-width: 180px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.select-campo-busqueda:focus {
+  outline: none;
+  border-color: #841816;
+  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+}
+
 /* 📊 Tabla */
 .tabla-nivel-academico {
   width: 100%;

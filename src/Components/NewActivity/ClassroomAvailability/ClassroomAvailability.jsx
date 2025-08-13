@@ -33,7 +33,7 @@ const ClassroomAvailability = () => {
         const fetchAulas = async () => {
             try {
                 const token = localStorage.getItem('authToken');
-                const res = await fetch(`https://localhost:7101/api/Aulas/clases/por-edificio/${edificio}`, {
+                const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/clases/por-edificio/${edificio}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 

@@ -61,7 +61,7 @@ const Register = () => {
         };
 
         try {
-            const response = await fetch("https://localhost:7101/api/Usuarios/registro", {
+            const response = await fetch("https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Usuarios/registro", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userInfo),

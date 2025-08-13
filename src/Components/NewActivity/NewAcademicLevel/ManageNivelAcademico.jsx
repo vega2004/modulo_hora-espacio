@@ -27,7 +27,7 @@ const ManageNivelAcademico = () => {
 
   const cargarNiveles = async () => {
     try {
-      const res = await fetch('https://localhost:7101/api/NivelAcademico/obtenerNivelAcademico', { headers });
+      const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/NivelAcademico/obtenerNivelAcademico', { headers });
       const data = await res.json();
       setNiveles(data);
       setPaginaActual(1);
@@ -43,7 +43,7 @@ const ManageNivelAcademico = () => {
     }
 
     try {
-      const res = await fetch(`https://localhost:7101/api/NivelAcademico/obtenerNivelAcademico/${encodeURIComponent(busqueda)}`, {
+      const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/NivelAcademico/obtenerNivelAcademico/${encodeURIComponent(busqueda)}`, {
         headers
       });
 
@@ -104,8 +104,8 @@ const ManageNivelAcademico = () => {
 
     try {
       const url = editandoId
-        ? `https://localhost:7101/api/NivelAcademico/modificar/${editandoId}`
-        : 'https://localhost:7101/api/NivelAcademico/crear/nivelAcademico';
+        ? `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/NivelAcademico/modificar/${editandoId}`
+        : 'https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/NivelAcademico/crear/nivelAcademico';
 
       const method = editandoId ? 'PUT' : 'POST';
 
@@ -177,7 +177,7 @@ const ManageNivelAcademico = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`https://localhost:7101/api/NivelAcademico/eliminar/${nivel.id}`, {
+        const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/NivelAcademico/eliminar/${nivel.id}`, {
           method: 'DELETE',
           headers
         });

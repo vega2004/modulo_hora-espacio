@@ -60,7 +60,7 @@ const ManageClases = () => {
 
       const resultados = await Promise.all(
         Object.entries(endpoints).map(async ([key, url]) => {
-          const res = await fetch(`https://localhost:7101${url}`, { headers });
+          const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net${url}`, { headers });
           const data = await res.json();
           return [key, data];
         })
@@ -74,7 +74,7 @@ const ManageClases = () => {
 
   const cargarClases = async () => {
     try {
-      const res = await fetch('https://localhost:7101/api/Clases/filtrar', {
+      const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/filtrar', {
         method: 'POST',
         headers,
         body: JSON.stringify({})
@@ -111,7 +111,7 @@ const ManageClases = () => {
             body[campo] = busqueda.trim();
           }
 
-          const res = await fetch('https://localhost:7101/api/Clases/filtrar', {
+          const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/filtrar', {
             method: 'POST',
             headers,
             body: JSON.stringify(body)
@@ -133,7 +133,7 @@ const ManageClases = () => {
           body[campoBusqueda] = busqueda.trim();
         }
 
-        const res = await fetch('https://localhost:7101/api/Clases/filtrar', {
+        const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/filtrar', {
           method: 'POST',
           headers,
           body: JSON.stringify(body)
@@ -205,8 +205,8 @@ const ManageClases = () => {
 
     try {
       const url = editandoId
-        ? `https://localhost:7101/api/Clases/actualizar/${editandoId}`
-        : `https://localhost:7101/api/Clases/crear/clases`;
+        ? `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/actualizar/${editandoId}`
+        : `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/crear/clases`;
       const method = editandoId ? 'PATCH' : 'POST';
 
       const body = {
@@ -270,7 +270,7 @@ const ManageClases = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const url = `https://localhost:7101/api/Clases/eliminar/${clase.id}`;
+        const url = `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/eliminar/${clase.id}`;
         const res = await fetch(url, { method: 'DELETE', headers });
         if (!res.ok) throw new Error();
         Swal.fire({ icon: 'success', title: 'Clase eliminada', timer: 1200, showConfirmButton: false });

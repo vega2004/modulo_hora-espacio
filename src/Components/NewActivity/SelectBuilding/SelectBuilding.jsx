@@ -67,7 +67,7 @@ const SelectBuilding = () => {
     const fetchEdificios = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const res = await fetch('https://localhost:7101/api/Aulas/obtenerAulas', {
+        const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/obtenerAulas', {
           headers: { Authorization: `Bearer ${token}` }
         });
 

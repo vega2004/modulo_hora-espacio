@@ -21,7 +21,7 @@ const ManageDocentes = () => {
 
   const cargarDocentes = async () => {
     try {
-      const res = await fetch('https://localhost:7101/api/Profesores/obtenerProfesores', { headers });
+      const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Profesores/obtenerProfesores', { headers });
       const data = await res.json();
       setDocentes(data);
       setPaginaActual(1);
@@ -37,7 +37,7 @@ const ManageDocentes = () => {
     }
 
     try {
-      const res = await fetch(`https://localhost:7101/api/Profesores/obtenerProfesores/${encodeURIComponent(busqueda)}`, { headers });
+      const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Profesores/obtenerProfesores/${encodeURIComponent(busqueda)}`, { headers });
       const data = await res.json();
 
       if (campoBusqueda === '*' || campoBusqueda === '') {
@@ -75,8 +75,8 @@ const ManageDocentes = () => {
 
     try {
       const url = editandoId
-        ? `https://localhost:7101/api/Profesores/modificar/${editandoId}`
-        : 'https://localhost:7101/api/Profesores/crear/profesores';
+        ? `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Profesores/modificar/${editandoId}`
+        : 'https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Profesores/crear/profesores';
 
       const method = editandoId ? 'PUT' : 'POST';
 
@@ -125,7 +125,7 @@ const ManageDocentes = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`https://localhost:7101/api/Profesores/eliminar/${docente.id}`, {
+        const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Profesores/eliminar/${docente.id}`, {
           method: 'DELETE',
           headers
         });

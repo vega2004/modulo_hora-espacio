@@ -38,7 +38,7 @@ const Login = ({ onLoginSuccess }) => {
     const usuarioLogin = { email: Email, pass: Pass };
 
     try {
-      const response = await fetch('https://localhost:7101/api/Usuarios/login', {
+      const response = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Usuarios/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(usuarioLogin),

@@ -22,7 +22,7 @@ const ManageAsignaturas = () => {
 
   const cargarAsignaturas = async () => {
     try {
-      const res = await fetch('https://localhost:7101/api/Asignatura/obtenerAsignaturas', { headers });
+      const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Asignatura/obtenerAsignaturas', { headers });
       const data = await res.json();
       setAsignaturas(data);
       setPaginaActual(1);
@@ -33,7 +33,7 @@ const ManageAsignaturas = () => {
 
   const buscarAsignaturasPorNombre = async (nombreBusqueda) => {
     try {
-      const res = await fetch(`https://localhost:7101/api/Asignatura/obtenerAsignaturas/${encodeURIComponent(nombreBusqueda)}`, { headers });
+      const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Asignatura/obtenerAsignaturas/${encodeURIComponent(nombreBusqueda)}`, { headers });
       if (!res.ok) throw new Error('Error al buscar asignaturas');
       const data = await res.json();
       setAsignaturas(data);
@@ -56,8 +56,8 @@ const ManageAsignaturas = () => {
 
     try {
       const url = editandoId
-        ? `https://localhost:7101/api/Asignatura/modificarAsignatura/${editandoId}`
-        : 'https://localhost:7101/api/Asignatura/crear/asignatura';
+        ? `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Asignatura/modificarAsignatura/${editandoId}`
+        : 'https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Asignatura/crear/asignatura';
 
       const method = editandoId ? 'PUT' : 'POST';
 
@@ -113,7 +113,7 @@ const ManageAsignaturas = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`https://localhost:7101/api/Asignatura/eliminarAsignatura/${asignatura.id}`, {
+        const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Asignatura/eliminarAsignatura/${asignatura.id}`, {
           method: 'DELETE',
           headers
         });

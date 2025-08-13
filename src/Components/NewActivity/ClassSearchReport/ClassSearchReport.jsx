@@ -53,7 +53,7 @@ const ClasssearchReport = () => {
 
             const results = await Promise.all(
                 Object.entries(endpoints).map(async ([key, url]) => {
-                    const res = await fetch(`https://localhost:7101${url}`, { headers });
+                    const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net${url}`, { headers });
                     const data = await res.json();
                     return [key, data];
                 })
@@ -69,7 +69,7 @@ const ClasssearchReport = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('https://localhost:7101/api/Clases/consultar/general', {
+            const response = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/consultar/general', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const ClasssearchReport = () => {
                 Object.entries(filtrosConvertidos).filter(([_, v]) => v !== '' && v !== undefined)
             );
 
-            const response = await fetch('https://localhost:7101/api/Clases/consultar/general', {
+            const response = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Clases/consultar/general', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

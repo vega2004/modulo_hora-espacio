@@ -23,7 +23,7 @@ const ManageAulas = () => {
 
   const cargarAulas = async () => {
     try {
-      const res = await fetch('https://localhost:7101/api/Aulas/obtenerAulas', { headers });
+      const res = await fetch('https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/obtenerAulas', { headers });
       const data = await res.json();
       setAulas(data);
       setPaginaActual(1);
@@ -34,7 +34,7 @@ const ManageAulas = () => {
 
   const buscarAulas = async (nombre) => {
     try {
-      const res = await fetch(`https://localhost:7101/api/Aulas/buscar/${encodeURIComponent(nombre)}`, { headers });
+      const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/obtenerAulas/${encodeURIComponent(nombre)}`, { headers });
       if (!res.ok) throw new Error('Error al buscar aulas');
       const data = await res.json();
       setAulas(data);
@@ -60,8 +60,8 @@ const ManageAulas = () => {
 
     try {
       const url = editandoId
-        ? `https://localhost:7101/api/Aulas/modificarAula/${editandoId}`
-        : 'https://localhost:7101/api/Aulas/crearAula';
+        ? `https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/modificarAula/${editandoId}`
+        : 'https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/crearAula';
 
       const method = editandoId ? 'PUT' : 'POST';
       const body = JSON.stringify({
@@ -113,7 +113,7 @@ const ManageAulas = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`https://localhost:7101/api/Aulas/eliminarAula/${id}`, {
+        const res = await fetch(`https://uaeh-control-bfbybef7bdhehkfz.mexicocentral-01.azurewebsites.net/api/Aulas/eliminarAula/${id}`, {
           method: 'DELETE',
           headers
         });

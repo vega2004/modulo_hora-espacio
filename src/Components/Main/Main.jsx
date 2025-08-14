@@ -7,9 +7,9 @@ import './Main.css';
 import img1 from '../../Assets/img1.png';
 import img2 from '../../Assets/img2.png';
 import img3 from '../../Assets/img3.png';
-import image1 from '../../Assets/image 1.png';
-import image2 from '../../Assets/image 2.png';
-import image3 from '../../Assets/image 3.png';
+import image1 from '../../Assets/image1.png';
+import image2 from '../../Assets/image2.png';
+import image3 from '../../Assets/image3.png';
 
 const Main = () => {
   const navigate = useNavigate();

@@ -46,7 +46,7 @@ const App = () => {
   const [userName, setUserName] = useState(localStorage.getItem('nombre') || '');
 
   return (
-    <Router>
+    <Router basename="/UAEHControl/HoraEspacio">
       <AppContent
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}

@@ -1,4 +1,3 @@
-
 /* 🏢 Matriz de aulas por edificio — CSS listo para muchas aulas, móviles y texto largo */
 
 /* ===== Variables de color (opcional) ===== */
@@ -65,12 +64,14 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
 }
 
 /* ===== Tabla ===== */
 .matriz-edificio-disponibilidad {
-  min-width: 1200px; /* o más, según el mínimo de columnas que quieras visibles sin scroll */
-  table-layout: fixed;
+  min-width: 1200px;              /* visible sin scroll hasta cierto nº de columnas */
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 1rem;
@@ -78,11 +79,11 @@
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   overflow: hidden;
-  table-layout: fixed; /* importante para elipsis */
+  table-layout: fixed;            /* importante para elipsis */
 }
 
 .matriz-edificio-disponibilidad thead th {
-  position: sticky;       /* encabezados pegajosos */
+  position: sticky;               /* encabezados pegajosos */
   top: 0;
   z-index: 3;
   background: var(--brand);
@@ -97,7 +98,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-   min-width: 110px; 
+  min-width: 110px;
   max-width: 220px;
 }
 
@@ -109,7 +110,9 @@
   border-right: 1px solid var(--grid-border);
   border-bottom: 1px solid var(--grid-border);
   transition: background-color 0.2s ease;
-  overflow: hidden;         /* necesario para elipsis/word-break */
+  overflow: hidden;               /* necesario para elipsis/word-break */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Primera columna (Hora) pegajosa */
@@ -147,7 +150,7 @@
 }
 
 .celda-edificio-ocupada div {
-  word-break: break-word; /* por si asignatura/profesor son largos */
+  word-break: break-word;         /* por si asignatura/profesor son largos */
 }
 
 .celda-edificio-ocupada div small {
@@ -158,18 +161,13 @@
 }
 
 /* Hover */
-.celda-edificio-libre:hover {
-  background-color: #dbe8f2;
-}
-.celda-edificio-ocupada:hover {
-  background-color: var(--busy-hover);
-}
-.matriz-edificio-disponibilidad td.hora-columna:hover {
-  background-color: var(--hour-bg);
-}
+.celda-edificio-libre:hover { background-color: #dbe8f2; }
+.celda-edificio-ocupada:hover { background-color: var(--busy-hover); }
+.matriz-edificio-disponibilidad td.hora-columna:hover { background-color: var(--hour-bg); }
 
 /* Alternancia de filas (suave; no pisa colores de celdas) */
-.matriz-edificio-disponibilidad tbody tr:nth-child(even) td:not(.hora-columna):not(.celda-edificio-ocupada):not(.celda-edificio-libre) {
+.matriz-edificio-disponibilidad tbody tr:nth-child(even)
+  td:not(.hora-columna):not(.celda-edificio-ocupada):not(.celda-edificio-libre) {
   background-color: #fcfcfc;
 }
 
@@ -198,6 +196,7 @@
     margin-top: 1.5rem;
   }
 
+  .matriz-edificio-disponibilidad { min-width: 680px; } /* compacta en móviles */
   .matriz-edificio-disponibilidad th,
   .matriz-edificio-disponibilidad td {
     padding: 0.45rem;

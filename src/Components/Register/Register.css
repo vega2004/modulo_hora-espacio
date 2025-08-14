@@ -10,10 +10,11 @@ body {
 /* Contenedor principal registro */
 .wrapper-registro {
   max-width: 420px;
-  margin: 15px auto;
-  padding: 40px 32px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 2.5rem 2rem;
   background-color: #ffffff;
-  border-radius: 16px;
+  border-radius: 1rem;
   border: 1px solid #e5e7eb;
   backdrop-filter: blur(10px);
   box-shadow:
@@ -32,27 +33,28 @@ body {
 /* Título */
 .wrapper-registro h1 {
   color: #575656;
-  font-size: 30px;
+  font-size: 1.875rem; /* 30px */
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
 }
 
 /* Input Group */
 .input-box-registro {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .input-box-registro input {
   width: 100%;
-  padding: 14px 44px;
+  padding: 0.875rem 2.75rem;
   border: 1px solid #827f7f;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #f9fafb;
-  font-size: 15px;
+  font-size: 1rem;
   color: #111827;
   transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 .input-box-registro input:focus {
@@ -69,73 +71,51 @@ body {
 /* Iconos */
 .input-box-registro .icon-left {
   position: absolute;
-  left: 14px;
+  left: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #9ca3af;
 }
 
 .input-box-registro .toggle-password {
   position: absolute;
-  right: 14px;
+  right: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #9ca3af;
   cursor: pointer;
-}
-
-/* Recordar/olvidé contraseña */
-.remember-forgot-registro {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: -10px 0 20px;
-}
-
-.remember-forgot-registro label input {
-  accent-color: #841816;
-  margin-right: 6px;
-}
-
-.remember-forgot-registro a {
-  color: #575656;
-  text-decoration: none;
-}
-
-.remember-forgot-registro a:hover {
-  text-decoration: underline;
 }
 
 /* Botón */
 .wrapper-registro button {
   width: 100%;
-  padding: 14px;
+  padding: 0.875rem;
   background-color: #841816;
   color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 0.625rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.1em;
   transition: 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
 
 .wrapper-registro button:hover {
   background-color: #ba0f16;
-  letter-spacing: 4px;
+  letter-spacing: 0.15em;
   text-shadow: 0 0 10px white, 0 0 30px white;
 }
 
 /* Registro link */
 .register-link-registro {
-  font-size: 14px;
+  font-size: 0.875rem;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   color: #6b7280;
 }
 
@@ -152,10 +132,10 @@ body {
 /* Mensajes */
 .error-message,
 .success-message {
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-bottom: 20px;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
   text-align: center;
 }
 
@@ -172,74 +152,66 @@ body {
 /* 💻 Tablets y pantallas medianas */
 @media (max-width: 1024px) {
   .wrapper-registro {
-    margin: 40px auto;
-    padding: 36px 28px;
+    padding: 2rem 1.75rem;
   }
 
   .wrapper-registro h1 {
-    font-size: 26px;
+    font-size: 1.625rem;
   }
 
   .wrapper-registro button {
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .remember-forgot-registro {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    font-size: 0.95rem;
   }
 }
 
 /* 📱 Smartphones grandes */
 @media (max-width: 768px) {
   .wrapper-registro {
-    margin: 30px 20px;
-    padding: 30px 24px;
+    margin: 1.5rem auto;
+    padding: 1.75rem 1.25rem;
   }
 
   .input-box-registro input {
-    padding: 12px 40px;
-    font-size: 14px;
+    padding: 0.75rem 2.5rem;
+    font-size: 0.9rem;
   }
 
   .input-box-registro .icon-left,
   .input-box-registro .toggle-password {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .wrapper-registro h1 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .register-link-registro {
-    font-size: 13px;
+    font-size: 0.8rem;
   }
 }
 
 /* 📳 Smartphones pequeños */
 @media (max-width: 480px) {
   .wrapper-registro {
-    margin: 24px 16px;
-    padding: 28px 18px;
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
   }
 
   .wrapper-registro h1 {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
 
   .input-box-registro input {
-    font-size: 13px;
-    padding: 12px 38px;
+    font-size: 0.85rem;
+    padding: 0.75rem 2.25rem;
   }
 
   .wrapper-registro button {
-    font-size: 14px;
-    padding: 12px;
+    font-size: 0.875rem;
+    padding: 0.75rem;
   }
 
   .register-link-registro {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 }

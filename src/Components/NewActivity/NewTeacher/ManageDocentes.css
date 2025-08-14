@@ -1,322 +1,325 @@
+/* =========================================================
+   ManageDocentes.css — Responsivo TOTAL y sin choques
+   ========================================================= */
+
+:root{
+  --brand: #841816;
+  --brand-dark: #6e1211;
+  --panel-bg: #ffffff;
+  --page-bg: #f7f9fb;
+  --text: #1a202c;
+  --muted: #6b7280;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+}
+
 /* 📦 Contenedor principal */
 .manage-docentes-container {
-  padding: 2rem;
-  max-width: 900px;
+  padding: clamp(12px, 2.5vw, 32px);
+  max-width: 1100px;                  /* más aire en desktop */
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
-  background-color: #f7f9fb;
+  background-color: var(--page-bg);
+  color: var(--text);
+  overflow-x: hidden;                  /* evita scroll lateral en móvil */
 }
 
 /* 🏷️ Título */
 .manage-docentes-container h2 {
   text-align: center;
-  color: #841816;
-  margin: 4rem 0 2rem;
+  color: var(--brand);
+  margin: clamp(16px, 3vw, 48px) 0 clamp(12px, 2vw, 24px);
   font-weight: 800;
-  font-size: 2.1rem;
+  font-size: clamp(1.25rem, 2.8vw, 2.1rem);
   text-transform: uppercase;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 2px rgba(0,0,0,.18);
 }
 
 /* 🧾 Formulario */
 .form-nuevo-docente {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  gap: clamp(10px, 1.6vw, 16px);
+  margin-bottom: clamp(16px, 2.2vw, 28px);
+  background-color: var(--panel-bg);
+  padding: clamp(12px, 2vw, 20px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
 }
 
-.form-nuevo-docente input {
+.form-nuevo-docente input{
   flex: 1 1 28%;
+  min-width: 220px;                    /* no se estrecha demasiado */
   padding: 0.65rem 1rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   font-size: 1rem;
   background-color: #e2e8f0;
-  color: #1a202c;
-  transition: border-color 0.2s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,.05);
 }
-
-.form-nuevo-docente input:focus {
+.form-nuevo-docente input:focus{
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
 
-.form-nuevo-docente button {
+.form-nuevo-docente button{
   padding: 0.65rem 1.4rem;
-  background: linear-gradient(to right, #841816, #a11c1a);
-  color: white;
+  background: linear-gradient(to right, var(--brand), #a11c1a);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-height: 44px;                     /* objetivo táctil */
+  box-shadow: 0 4px 10px rgba(132,24,22,.25);
+  transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
 }
-
-.form-nuevo-docente button:hover {
-  background: #6e1211;
+.form-nuevo-docente button:hover{
+  background: var(--brand-dark);
   transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0,0,0,.12);
+}
+.form-nuevo-docente button:disabled{
+  opacity: .7; cursor: not-allowed;
 }
 
 /* 🔍 Barra de búsqueda */
-.barra-busqueda {
+.barra-busqueda{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: .5rem;
+  margin-bottom: clamp(14px, 2vw, 24px);
+  flex-wrap: wrap;
 }
 
-.barra-busqueda input {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  border: 1.5px solid #ccc;
+.barra-busqueda .select-campo-busqueda,
+.barra-busqueda input{
+  padding: .6rem 1rem;
+  font-size: .95rem;
+  border: 1.5px solid #cbd5e1;
   border-radius: 10px;
   background-color: #f1f5f9;
-  color: #1a202c;
-  transition: border-color 0.2s ease-in-out;
-  width: 280px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
-.barra-busqueda input:focus {
+.barra-busqueda .select-campo-busqueda{
+  min-width: 180px;
+}
+.barra-busqueda input{
+  width: clamp(220px, 32vw, 320px);
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+
+.barra-busqueda .select-campo-busqueda:focus,
+.barra-busqueda input:focus{
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
 
-.barra-busqueda button {
-  padding: 0.6rem 1.2rem;
-  background-color: #841816;
-  color: white;
+.barra-busqueda button{
+  padding: .6rem 1.2rem;
+  background-color: var(--brand);
+  color: #fff;
   border: none;
   border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: flex;
+  font-weight: 700;
+  font-size: .95rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(132, 24, 22, 0.3);
-  transition: background-color 0.3s ease;
+  min-height: 42px;
+  box-shadow: 0 4px 12px rgba(132,24,22,.3);
+  transition: background-color .2s ease, transform .12s ease;
 }
+.barra-busqueda button:hover{ background-color: var(--brand-dark); transform: translateY(-1px); }
 
-.barra-busqueda button:hover {
-  background-color: #6e1211;
-}
+.barra-busqueda svg{ width: 1rem; height: 1rem; fill: currentColor; }
 
-.barra-busqueda svg {
-  width: 1rem;
-  height: 1rem;
-  fill: white;
-}
-
-/* 📊 Tabla */
-.tabla-docentes {
+/* 📊 Tabla — desktop */
+.tabla-docentes{
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
-  font-size: 0.95rem;
+  background-color: var(--panel-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+  font-size: .95rem;
   overflow: hidden;
   text-align: center;
 }
 
-.tabla-docentes thead th {
-  background-color: #841816;
-  color: white;
+.tabla-docentes thead th{
+  background-color: var(--brand);
+  color: #fff;
   padding: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 3px solid #e5e7eb;
 }
 
-.tabla-docentes td {
+.tabla-docentes td{
   padding: 1rem;
   border-bottom: 2px solid #d1d5db;
   border-right: 2px solid #d1d5db;
   background-color: #fefefe;
-  color: #1a202c;
+  color: var(--text);
 }
+.tabla-docentes tr:last-child td{ border-bottom: none; }
+.tabla-docentes td:last-child{ border-right: none; }
 
-.tabla-docentes tr:last-child td {
-  border-bottom: none;
-}
-
-.tabla-docentes td:last-child {
-  border-right: none;
-}
-
-.tabla-docentes tbody tr:nth-child(even) {
-  background-color: #f9fafb;
-}
-
-.tabla-docentes tbody tr:hover {
+.tabla-docentes tbody tr:nth-child(even){ background-color: #f9fafb; }
+.tabla-docentes tbody tr:hover{
   background-color: #edf2f7;
-  transition: background-color 0.3s ease;
+  transition: background-color .2s ease;
 }
 
 /* 🛠️ Botones acción */
-.tabla-docentes td button {
-  margin: 0 0.3rem;
-  padding: 0.5rem 1rem;
+.tabla-docentes td button{
+  margin: 0 .3rem;
+  padding: .5rem 1rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: .88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  min-height: 40px;
+  transition: background-color .15s ease, transform .1s ease;
 }
+.tabla-docentes td button:hover{ transform: translateY(-1px); }
 
-.tabla-docentes .btn-editar {
-  background-color: #2563eb;
-  color: white;
-}
+.tabla-docentes .btn-editar{ background-color: #2563eb; color: #fff; }
+.tabla-docentes .btn-editar:hover{ background-color: #1e40af; }
 
-.tabla-docentes .btn-editar:hover {
-  background-color: #1e40af;
-}
-
-.tabla-docentes .btn-eliminar {
-  background-color: #dc2626;
-  color: white;
-}
-
-.tabla-docentes .btn-eliminar:hover {
-  background-color: #991b1b;
-}
+.tabla-docentes .btn-eliminar{ background-color: #dc2626; color: #fff; }
+.tabla-docentes .btn-eliminar:hover{ background-color: #991b1b; }
 
 /* 🔢 Paginación */
-.paginacion {
+.paginacion{
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.paginacion button {
+.paginacion button{
   padding: 6px 12px;
   border: none;
-  background-color: #841816;
-  color: white;
-  border-radius: 4px;
-  font-weight: 600;
+  background-color: var(--brand);
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 700;
+  min-height: 40px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: background-color .2s ease, transform .1s ease;
 }
+.paginacion button:hover{ background-color: var(--brand-dark); transform: translateY(-1px); }
+.paginacion button:disabled{ background-color: #cbd5e1; cursor: not-allowed; transform: none; }
 
-.paginacion button:hover {
-  background-color: #6e1211;
-}
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px){
+  .manage-docentes-container{ padding: clamp(10px, 2vw, 16px); }
 
-.paginacion button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  .form-nuevo-docente input{ flex: 1 1 45%; }
+  .form-nuevo-docente button{ width: 100%; }
+
+  .barra-busqueda{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .8rem;
+  }
+  .barra-busqueda .select-campo-busqueda,
+  .barra-busqueda input,
+  .barra-busqueda button{ width: 100%; }
+
+  .tabla-docentes thead th,
+  .tabla-docentes td{ padding: .85rem; }
 }
 
 /* 📲 Móviles medianos (≤768px) */
-@media (max-width: 768px) {
-  .manage-docentes-container {
-    padding: 1rem;
-  }
-
-  .form-nuevo-docente input {
+@media (max-width: 768px){
+  .tabla-docentes{ font-size: .9rem; }
+  .form-nuevo-docente input{
     flex: 1 1 100%;
-    font-size: 0.95rem;
-    padding: 0.6rem 0.9rem;
+    font-size: .95rem;
+    padding: .6rem .9rem;
   }
-
-  .form-nuevo-docente button {
-    font-size: 0.95rem;
-    width: 100%;
-  }
-
-  .barra-busqueda input {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  .tabla-docentes {
-    font-size: 0.9rem;
-  }
-
-  .tabla-docentes td button {
-    padding: 0.45rem 0.8rem;
-    font-size: 0.85rem;
+  .form-nuevo-docente button{ font-size: .95rem; }
+  .tabla-docentes td button{
+    padding: .45rem .8rem; font-size: .85rem;
   }
 }
 
-/* 📳 Móviles pequeños (≤480px) */
-@media (max-width: 480px) {
-  .manage-docentes-container h2 {
-    font-size: 1.4rem;
-    margin: 2.5rem 0 1rem;
+/* 📳 Móviles pequeños (≤480px) — Tabla a “cards” sin tocar JSX */
+@media (max-width: 480px){
+  .manage-docentes-container h2{
+    font-size: clamp(1.2rem, 5.2vw, 1.4rem);
+    margin: clamp(12px, 3vw, 24px) 0 clamp(8px, 2vw, 16px);
   }
 
-  .form-nuevo-docente {
-    padding: 1rem 0.75rem;
-  }
+  .form-nuevo-docente{ padding: 1rem .75rem; }
 
-  .tabla-docentes thead {
-    display: none;
-  }
+  .tabla-docentes{ border-radius: var(--radius-lg); box-shadow: none; }
+  .tabla-docentes thead{ display: none; }
 
-  .tabla-docentes tbody tr {
+  .tabla-docentes tbody tr{
     display: block;
     margin-bottom: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
     background-color: #fff;
+    overflow: hidden;
   }
 
-  .tabla-docentes td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.7rem 1rem;
+  .tabla-docentes tbody tr:hover{ background: #fff; }
+
+  .tabla-docentes td{
+    display: grid;
+    grid-template-columns: 42% 1fr;  /* etiqueta | valor */
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem 1rem;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
   }
+  .tabla-docentes td:last-child{ border-bottom: none; }
 
-  .tabla-docentes td:last-child {
-    border-bottom: none;
+  /* Rótulos automáticos por columna */
+  .tabla-docentes tbody tr td:nth-child(1)::before{ content: "Nombre"; font-weight: 700; color: var(--brand); }
+  .tabla-docentes tbody tr td:nth-child(2)::before{ content: "Apellido Paterno"; font-weight: 700; color: var(--brand); }
+  .tabla-docentes tbody tr td:nth-child(3)::before{ content: "Apellido Materno"; font-weight: 700; color: var(--brand); }
+  .tabla-docentes tbody tr td:nth-child(4)::before{ content: "Acciones"; font-weight: 700; color: var(--brand); }
+
+  /* Botones en columna dentro de “Acciones” */
+  .tabla-docentes tbody tr td:nth-child(4){
+    grid-template-columns: 1fr; /* etiqueta arriba, botones debajo */
   }
-
-  .tabla-docentes td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #841816;
-  }
-
-  .tabla-docentes td button {
+  .tabla-docentes td button{
     width: 100%;
-    margin-bottom: 0.5rem;
+    margin: 6px 0 0 0;
   }
 }
 
-/* 💻 Tablets (≤1024px) */
-@media (max-width: 1024px) {
-  .form-nuevo-docente input {
-    flex: 1 1 45%;
+/* 🖥️ TVs / 4K (≥1441px) — más aire */
+@media (min-width: 1441px){
+  .manage-docentes-container{
+    max-width: 1280px;
+    padding: clamp(20px, 2vw, 36px);
   }
-
-  .barra-busqueda {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .barra-busqueda input,
-  .barra-busqueda button {
-    width: 100%;
+  .form-nuevo-docente{
+    gap: clamp(12px, 1.4vw, 20px);
+    padding: clamp(14px, 1.6vw, 24px);
   }
 }

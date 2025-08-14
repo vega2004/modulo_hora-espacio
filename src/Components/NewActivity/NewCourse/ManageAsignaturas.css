@@ -1,356 +1,316 @@
+/* =========================================================
+   ManageAsignaturas.css — Responsivo TOTAL y sin choques
+   ========================================================= */
+
+:root{
+  --brand: #841816;
+  --brand-dark: #6e1211;
+  --panel-bg: #ffffff;
+  --page-bg: #f7f9fb;
+  --text: #1a202c;
+  --muted: #6b7280;
+  --radius-lg: 12px;
+  --radius-md: 10px;
+}
+
 /* 📦 Contenedor principal */
 .manage-asignaturas-container {
-  padding: 2rem;
-  max-width: 860px;
+  padding: clamp(12px, 2.5vw, 32px);
+  max-width: 1100px;            /* más aire en desktop */
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
-  background-color: #f7f9fb;
+  background-color: var(--page-bg);
+  color: var(--text);
+  overflow-x: hidden;            /* evita scroll lateral en móvil */
 }
 
 /* 🏷️ Título central */
 .manage-asignaturas-container h2 {
   text-align: center;
-  color: #841816;
-  margin: 4rem 0 2rem;
+  color: var(--brand);
+  margin: clamp(16px, 3vw, 48px) 0 clamp(12px, 2vw, 24px);
   font-weight: 800;
-  font-size: 2.1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: clamp(1.25rem, 2.8vw, 2.1rem);
+  text-shadow: 1px 1px 2px rgba(0,0,0,.18);
   text-transform: uppercase;
 }
 
 /* 📝 Formulario */
 .form-nueva-asignatura {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
   flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 16px);
+  margin-bottom: clamp(16px, 2.2vw, 28px);
+  background-color: var(--panel-bg);
+  padding: clamp(12px, 2vw, 20px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
 }
 
-.form-nueva-asignatura input {
-  flex: 1;
-  padding: 0.65rem 1rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: #e2e8f0;
-  color: #1a202c;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.2s ease-in-out;
-}
-
-.form-nueva-asignatura input:focus {
-  outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
-}
-
+/* Campos (input + select) */
 .form-nueva-asignatura input,
-.form-nueva-asignatura select {
+.form-nueva-asignatura select{
   flex: 1 1 28%;
-  padding: 0.65rem 1rem;
-  min-width: 200px;
-  max-width: 250px;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
+  min-width: 200px;               /* evita que se aplasten demasiado */
+  max-width: 320px;               /* y que no se alarguen de más */
+  padding: .65rem 1rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   font-size: 1rem;
   background-color: #e2e8f0;
-  color: #1a202c;
-  transition: border-color 0.2s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,.05);
 }
-
 .form-nueva-asignatura input:focus,
-.form-nueva-asignatura select:focus {
+.form-nueva-asignatura select:focus{
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
-
 
 /* 🎯 Botón guardar */
-.form-nueva-asignatura button {
-  padding: 0.65rem 1.4rem;
-  background: linear-gradient(to right, #841816, #a11c1a);
-  color: white;
+.form-nueva-asignatura button{
+  padding: .65rem 1.4rem;
+  background: linear-gradient(to right, var(--brand), #a11c1a);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-height: 44px;               /* objetivo táctil */
+  box-shadow: 0 4px 10px rgba(132,24,22,.25);
+  transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
 }
-
-.form-nueva-asignatura button:hover {
-  background: #6e1211;
+.form-nueva-asignatura button:hover{
+  background: var(--brand-dark);
   transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0,0,0,.12);
+}
+.form-nueva-asignatura button:disabled{
+  opacity: .7; cursor: not-allowed;
 }
 
-/* 🔍 Barra de búsqueda (ALINEADA A LA IZQUIERDA) */
-.barra-busqueda {
+/* 🔍 Barra de búsqueda (alineada a la izquierda) */
+.barra-busqueda{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: .5rem;
+  margin-bottom: clamp(14px, 2vw, 24px);
+  flex-wrap: wrap;
 }
-
-.barra-busqueda input {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  border: 1.5px solid #ccc;
-  border-radius: 10px;
+.barra-busqueda input{
+  padding: .6rem 1rem;
+  font-size: .95rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   background-color: #f1f5f9;
-  color: #1a202c;
-  transition: border-color 0.2s ease-in-out;
-  width: 280px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: var(--text);
+  width: clamp(220px, 32vw, 320px);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
 }
-
-.barra-busqueda input:focus {
+.barra-busqueda input:focus{
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
-
-.barra-busqueda button {
-  padding: 0.6rem 1.2rem;
-  background-color: #841816;
-  color: white;
+.barra-busqueda button{
+  padding: .6rem 1.2rem;
+  background-color: var(--brand);
+  color: #fff;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: flex;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: .95rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(132, 24, 22, 0.3);
-  transition: background-color 0.3s ease;
+  min-height: 42px;
+  box-shadow: 0 4px 12px rgba(132,24,22,.3);
+  transition: background-color .2s ease, transform .12s ease;
 }
+.barra-busqueda button:hover{ background-color: var(--brand-dark); transform: translateY(-1px); }
+.barra-busqueda svg{ width: 1rem; height: 1rem; fill: currentColor; }
 
-.barra-busqueda button:hover {
-  background-color: #6e1211;
-}
-
-.barra-busqueda svg {
-  width: 1rem;
-  height: 1rem;
-  fill: white;
-}
-
-/* 📊 Tabla */
-.tabla-asignaturas {
+/* 📊 Tabla — desktop */
+.tabla-asignaturas{
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
-  font-size: 0.95rem;
+  background-color: var(--panel-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+  font-size: .95rem;
   overflow: hidden;
 }
-
 .tabla-asignaturas th,
-.tabla-asignaturas td {
-  text-align: center;
-  /* ✅ Centra horizontalmente */
-  vertical-align: middle;
-  /* ✅ Centra verticalmente */
+.tabla-asignaturas td{
+  text-align: center;             /* horizontal */
+  vertical-align: middle;         /* vertical */
 }
-
-.tabla-asignaturas thead th {
-  background-color: #841816;
-  color: white;
+.tabla-asignaturas thead th{
+  background-color: var(--brand);
+  color: #fff;
   padding: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 3px solid #e5e7eb;
 }
-
-.tabla-asignaturas td {
+.tabla-asignaturas td{
   padding: 1rem;
   border-bottom: 2px solid #d1d5db;
   border-right: 2px solid #d1d5db;
   background-color: #fefefe;
-  color: #1a202c;
+  color: var(--text);
 }
-
-.tabla-asignaturas tr:last-child td {
-  border-bottom: none;
-}
-
-.tabla-asignaturas td:last-child {
-  border-right: none;
-}
-
-.tabla-asignaturas tbody tr:nth-child(even) {
-  background-color: #f9fafb;
-}
-
-.tabla-asignaturas tbody tr:hover {
+.tabla-asignaturas tr:last-child td{ border-bottom: none; }
+.tabla-asignaturas td:last-child{ border-right: none; }
+.tabla-asignaturas tbody tr:nth-child(even){ background-color: #f9fafb; }
+.tabla-asignaturas tbody tr:hover{
   background-color: #edf2f7;
-  transition: background-color 0.3s ease;
+  transition: background-color .2s ease;
 }
 
 /* 🛠️ Botones de acción */
-.tabla-asignaturas td button {
-  margin-right: 0.5rem;
-  padding: 0.5rem 1rem;
+.tabla-asignaturas td button{
+  margin-right: .5rem;
+  padding: .5rem 1rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: .88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  min-height: 40px;
+  transition: background-color .15s ease, transform .1s ease;
 }
+.tabla-asignaturas td button:hover{ transform: translateY(-1px); }
 
-.tabla-asignaturas .btn-editar {
-  background-color: #2563eb;
-  color: white;
-}
+.tabla-asignaturas .btn-editar{ background-color: #2563eb; color: #fff; }
+.tabla-asignaturas .btn-editar:hover{ background-color: #1e40af; }
 
-.tabla-asignaturas .btn-editar:hover {
-  background-color: #1e40af;
-}
-
-.tabla-asignaturas .btn-eliminar {
-  background-color: #dc2626;
-  color: white;
-}
-
-.tabla-asignaturas .btn-eliminar:hover {
-  background-color: #991b1b;
-}
+.tabla-asignaturas .btn-eliminar{ background-color: #dc2626; color: #fff; }
+.tabla-asignaturas .btn-eliminar:hover{ background-color: #991b1b; }
 
 /* 🔢 Paginación */
-.paginacion {
+.paginacion{
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
-
-.paginacion button {
+.paginacion button{
   padding: 6px 12px;
   border: none;
-  background-color: #841816;
-  color: white;
-  border-radius: 4px;
-  font-weight: 600;
+  background-color: var(--brand);
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 700;
+  min-height: 40px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: background-color .2s ease, transform .1s ease;
 }
+.paginacion button:hover{ background-color: var(--brand-dark); transform: translateY(-1px); }
+.paginacion button:disabled{ background-color: #cbd5e1; cursor: not-allowed; transform: none; }
 
-.paginacion button:hover {
-  background-color: #6e1211;
-}
+/* 💻 Tablets (≤1024px) */
+@media (max-width: 1024px){
+  .manage-asignaturas-container{ padding: clamp(10px, 2vw, 16px); }
 
-.paginacion button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  .form-nueva-asignatura{ gap: .75rem; }
+  .form-nueva-asignatura input,
+  .form-nueva-asignatura select{ flex: 1 1 45%; max-width: none; }
+
+  .barra-busqueda{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .8rem;
+  }
+  .barra-busqueda input,
+  .barra-busqueda button{ width: 100%; }
+
+  .tabla-asignaturas th,
+  .tabla-asignaturas td{ padding: .85rem; }
 }
 
 /* 📲 Móviles medianos (≤768px) */
-@media (max-width: 768px) {
-  .manage-asignaturas-container {
-    padding: 1rem;
-  }
+@media (max-width: 768px){
+  .form-nueva-asignatura input{ font-size: .95rem; padding: .6rem .9rem; }
+  .form-nueva-asignatura button{ font-size: .95rem; width: 100%; }
 
-  .form-nueva-asignatura input {
-    font-size: 0.95rem;
-    padding: 0.6rem 0.9rem;
-  }
+  .barra-busqueda input{ width: 100%; font-size: .9rem; }
 
-  .form-nueva-asignatura button {
-    font-size: 0.95rem;
-    width: 100%;
-  }
-
-  .barra-busqueda input {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  .tabla-asignaturas td button {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
-  }
+  .tabla-asignaturas{ font-size: .9rem; }
+  .tabla-asignaturas td button{ padding: .5rem .8rem; font-size: .85rem; }
 }
 
-/* 📳 Móviles pequeños (≤480px) */
-@media (max-width: 480px) {
-  .manage-asignaturas-container h2 {
-    font-size: 1.4rem;
-    margin: 2.5rem 0 1.5rem;
+/* 📳 Móviles pequeños (≤480px) — Tabla a “cards” sin tocar JSX */
+@media (max-width: 480px){
+  .manage-asignaturas-container h2{
+    font-size: clamp(1.2rem, 5.2vw, 1.4rem);
+    margin: clamp(12px, 3vw, 24px) 0 clamp(10px, 2.5vw, 18px);
   }
 
-  .tabla-asignaturas thead {
-    display: none;
-  }
+  .tabla-asignaturas{ border-radius: var(--radius-lg); box-shadow: none; }
+  .tabla-asignaturas thead{ display: none; }
 
-  .tabla-asignaturas tbody tr {
+  .tabla-asignaturas tbody tr{
     display: block;
     margin-bottom: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
     background-color: #fff;
+    overflow: hidden;
   }
+  .tabla-asignaturas tbody tr:hover{ background: #fff; }
 
-  .tabla-asignaturas td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.7rem 1rem;
+  .tabla-asignaturas td{
+    display: grid;
+    grid-template-columns: 42% 1fr;  /* etiqueta | valor */
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem 1rem;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
   }
+  .tabla-asignaturas td:last-child{ border-bottom: none; }
 
-  .tabla-asignaturas td:last-child {
-    border-bottom: none;
+  /* Rótulos automáticos por columna */
+  .tabla-asignaturas tbody tr td:nth-child(1)::before{ content: "Nombre"; font-weight: 700; color: var(--brand); }
+  .tabla-asignaturas tbody tr td:nth-child(2)::before{ content: "Periodo"; font-weight: 700; color: var(--brand); }
+  .tabla-asignaturas tbody tr td:nth-child(3)::before{ content: "Acciones"; font-weight: 700; color: var(--brand); }
+
+  /* Botones en columna dentro de “Acciones” */
+  .tabla-asignaturas tbody tr td:nth-child(3){
+    grid-template-columns: 1fr;
   }
-
-  .tabla-asignaturas td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #841816;
-  }
-
-  .tabla-asignaturas td button {
+  .tabla-asignaturas td button{
     width: 100%;
-    margin-bottom: 0.5rem;
-  }
-}
-
-/* 💻 Tablets (≤1024px) */
-@media (max-width: 1024px) {
-  .form-nueva-asignatura {
-    gap: 0.75rem;
-  }
-
-  .form-nueva-asignatura input {
-    flex: 1 1 100%;
-  }
-
-  .barra-busqueda {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .barra-busqueda input,
-  .barra-busqueda button {
-    width: 100%;
+    margin: 6px 0 0 0;
   }
 }
 
 /* 🖥️ Escritorios grandes y TV (≥1440px) */
-@media (min-width: 1440px) {
-  .manage-asignaturas-container {
-    max-width: 1300px;
+@media (min-width: 1440px){
+  .manage-asignaturas-container{ max-width: 1300px; }
+}
+
+/* Accesibilidad: respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce){
+  .form-nueva-asignatura,
+  .form-nueva-asignatura button,
+  .barra-busqueda button,
+  .tabla-asignaturas td button,
+  .paginacion button{
+    transition: none;
   }
 }

@@ -1,68 +1,90 @@
+/* =========================================================
+   ManageNivelAcademico.css — Responsivo TOTAL y sin choques
+   ========================================================= */
+
+:root{
+  --brand: #841816;
+  --brand-dark: #6e1211;
+  --panel-bg: #ffffff;
+  --page-bg: #f7f9fb;
+  --text: #1a202c;
+  --muted: #6b7280;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+}
+
 /* 🎓 Contenedor principal */
 .manage-nivel-academico-container {
-  padding: 2rem;
-  max-width: 900px;
+  padding: clamp(12px, 2.5vw, 32px);
+  max-width: 1100px;             /* un poco más ancho que 900 para respirar en desktop */
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
-  background-color: #f7f9fb;
+  background-color: var(--page-bg);
+  color: var(--text);
 }
 
 .manage-nivel-academico-container h2 {
   text-align: center;
-  color: #841816;
-  margin: 3rem 0 2rem;
+  color: var(--brand);
+  margin: clamp(16px, 3vw, 48px) 0 clamp(12px, 2vw, 24px);
   font-weight: 800;
-  font-size: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  text-shadow: 1px 1px 2px rgba(0,0,0,.12);
 }
 
 /* 📝 Formulario */
 .form-nivel-academico {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  background-color: #fff;
-  padding: 1.2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
+  gap: clamp(10px, 1.6vw, 16px);
+  background-color: var(--panel-bg);
+  padding: clamp(12px, 2vw, 20px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  margin-bottom: clamp(16px, 2.2vw, 28px);
 }
 
 .form-nivel-academico input,
 .form-nivel-academico select {
   flex: 1 1 calc(50% - 1rem);
+  min-width: 220px;                /* evita inputs demasiado estrechos */
   padding: 0.65rem 1rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   background-color: #e2e8f0;
   font-size: 1rem;
-  color: #1a202c;
-  transition: border-color 0.2s ease-in-out;
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-
 .form-nivel-academico input:focus,
 .form-nivel-academico select:focus {
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
 
 .form-nivel-academico button {
-  padding: 0.7rem 1.4rem;
-  background: linear-gradient(to right, #841816, #a11c1a);
-  color: white;
+  padding: .7rem 1.4rem;
+  background: linear-gradient(to right, var(--brand), #a11c1a);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-height: 44px;                /* objetivo táctil */
+  box-shadow: 0 4px 10px rgba(132,24,22,.25);
+  transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
 }
-
 .form-nivel-academico button:hover {
-  background: #6e1211;
+  background: var(--brand-dark);
   transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0,0,0,.12);
+}
+.form-nivel-academico button:disabled{
+  opacity: .7;
+  cursor: not-allowed;
 }
 
 /* 🔍 Barra búsqueda */
@@ -70,137 +92,118 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: .5rem;
+  margin-bottom: clamp(14px, 2vw, 24px);
+  flex-wrap: wrap;
 }
 
 .barra-busqueda input {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
+  padding: .6rem 1rem;
+  font-size: .95rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   background-color: #f1f5f9;
-  color: #1a202c;
-  width: 280px;
+  color: var(--text);
+  width: clamp(220px, 32vw, 320px);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-
 .barra-busqueda input:focus {
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
 
 .barra-busqueda button {
-  padding: 0.6rem 1.2rem;
-  background-color: #841816;
-  color: white;
+  padding: .6rem 1.2rem;
+  background-color: var(--brand);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: flex;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: .95rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
-  transition: background-color 0.3s ease;
+  min-height: 42px;
+  box-shadow: 0 4px 10px rgba(132,24,22,.25);
+  transition: background-color .2s ease, box-shadow .2s ease, transform .12s ease;
 }
+.barra-busqueda button:hover { background-color: var(--brand-dark); transform: translateY(-1px); }
 
-.barra-busqueda button:hover {
-  background-color: #6e1211;
-}
-
-.barra-busqueda svg {
-  width: 1rem;
-  height: 1rem;
-  fill: white;
-}
+.barra-busqueda svg { width: 1rem; height: 1rem; fill: currentColor; }
 
 .select-campo-busqueda {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
+  padding: .6rem 1rem;
+  font-size: .95rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
   background-color: #f1f5f9;
-  color: #1a202c;
+  color: var(--text);
   min-width: 180px;
-  transition: border-color 0.2s ease-in-out;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-
 .select-campo-busqueda:focus {
   outline: none;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.2);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
+  background-color: #fff;
 }
 
-/* 📊 Tabla */
+/* 📊 Tabla — desktop */
 .tabla-nivel-academico {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
-  font-size: 0.95rem;
+  background-color: var(--panel-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+  font-size: .95rem;
   overflow: hidden;
   text-align: center;
 }
 
 .tabla-nivel-academico thead th {
-  background-color: #841816;
-  color: white;
+  background-color: var(--brand);
+  color: #fff;
   padding: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 3px solid #e5e7eb;
 }
 
 .tabla-nivel-academico td {
   padding: 1rem;
   border-bottom: 2px solid #d1d5db;
-  border-right: 2px solid #d1d5db;
-  /* ✅ agrega esto para líneas verticales */
+  border-right: 2px solid #d1d5db;   /* líneas verticales */
   background-color: #fefefe;
-  color: #1a202c;
+  color: var(--text);
 }
-
-/* Elimina la línea derecha del último td para evitar doble borde */
-.tabla-nivel-academico td:last-child {
-  border-right: none;
-}
+.tabla-nivel-academico td:last-child { border-right: none; }
 
 .tabla-nivel-academico tbody tr:hover {
   background-color: #edf2f7;
-  transition: background-color 0.3s ease;
+  transition: background-color .2s ease;
 }
 
 .tabla-nivel-academico td button {
-  margin-right: 0.5rem;
-  padding: 0.5rem 1rem;
+  margin-right: .5rem;
+  padding: .5rem 1rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: .88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  min-height: 40px;
+  transition: background-color .15s ease, transform .1s ease;
 }
+.tabla-nivel-academico td button:hover{ transform: translateY(-1px); }
 
-.btn-editar {
-  background-color: #2563eb;
-  color: white;
-}
+.btn-editar { background-color: #2563eb; color: #fff; }
+.btn-editar:hover { background-color: #1e40af; }
 
-.btn-editar:hover {
-  background-color: #1e40af;
-}
-
-.btn-eliminar {
-  background-color: #dc2626;
-  color: white;
-}
-
-.btn-eliminar:hover {
-  background-color: #991b1b;
-}
+.btn-eliminar { background-color: #dc2626; color: #fff; }
+.btn-eliminar:hover { background-color: #991b1b; }
 
 /* 🔢 Paginación */
 .paginacion {
@@ -209,133 +212,125 @@
   align-items: center;
   gap: 12px;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .paginacion button {
   padding: 6px 12px;
   border: none;
-  background-color: #841816;
-  color: white;
-  border-radius: 4px;
-  font-weight: 600;
+  background-color: var(--brand);
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 700;
+  min-height: 40px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: background-color .2s ease, transform .1s ease;
 }
-
-.paginacion button:hover {
-  background-color: #6e1211;
-}
-
-.paginacion button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+.paginacion button:hover { background-color: var(--brand-dark); transform: translateY(-1px); }
+.paginacion button:disabled { background-color: #cbd5e1; cursor: not-allowed; transform: none; }
 
 /* 💻 Tablets (≤1024px) */
 @media (max-width: 1024px) {
-  .manage-nivel-academico-container {
-    padding: 1rem;
-  }
+  .manage-nivel-academico-container { padding: clamp(10px, 2vw, 16px); }
 
   .form-nivel-academico {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: .8rem;
   }
-
   .form-nivel-academico input,
   .form-nivel-academico select {
     width: 100%;
     flex: 1 1 100%;
   }
+  .form-nivel-academico button { width: 100%; }
 
-  .form-nivel-academico button {
-    width: 100%;
-  }
-
-  .barra-busqueda {
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
+  .barra-busqueda { flex-direction: column; align-items: stretch; gap: .6rem; }
   .barra-busqueda input,
-  .barra-busqueda button {
-    width: 100%;
-  }
+  .barra-busqueda button,
+  .select-campo-busqueda { width: 100%; }
 
   .tabla-nivel-academico thead th,
-  .tabla-nivel-academico td {
-    padding: 0.8rem;
-  }
+  .tabla-nivel-academico td { padding: .8rem; }
 }
 
 /* 📱 Móviles grandes (≤768px) */
 @media (max-width: 768px) {
   .manage-nivel-academico-container h2 {
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    margin: clamp(12px, 3vw, 24px) 0 clamp(8px, 2vw, 16px);
   }
 
   .form-nivel-academico input,
   .form-nivel-academico select {
-    font-size: 0.95rem;
-    padding: 0.6rem 1rem;
+    font-size: .95rem;
+    padding: .6rem 1rem;
   }
+  .form-nivel-academico button { font-size: .95rem; }
 
-  .form-nivel-academico button {
-    font-size: 0.95rem;
-  }
+  .tabla-nivel-academico { font-size: .9rem; }
 
-  .tabla-nivel-academico {
-    font-size: 0.9rem;
-  }
-
-  .paginacion {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+  .paginacion { flex-direction: column; gap: .5rem; }
 }
 
-/* 📳 Móviles pequeños (≤480px) */
+/* 📳 Móviles pequeños (≤480px) — Tabla a “cards” sin tocar JSX */
 @media (max-width: 480px) {
-  .manage-nivel-academico-container {
-    padding: 1rem 0.75rem;
-  }
+  .manage-nivel-academico-container { padding: 1rem .75rem; }
 
-  .form-nivel-academico {
-    padding: 1rem;
-  }
+  .form-nivel-academico { padding: 1rem; }
+  .form-nivel-academico button { padding: .6rem 1rem; }
 
-  .form-nivel-academico button {
-    padding: 0.6rem 1rem;
-  }
-
-  .tabla-nivel-academico thead {
-    display: none;
-  }
+  .tabla-nivel-academico { border-radius: var(--radius-lg); box-shadow: none; }
+  .tabla-nivel-academico thead { display: none; } /* ocultamos cabecera */
 
   .tabla-nivel-academico tbody tr {
     display: block;
     margin-bottom: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 3px 8px rgba(0,0,0,.06);
+    background: #fff;
+    overflow: hidden;
   }
+
+  .tabla-nivel-academico tbody tr:hover { background: #fff; }
 
   .tabla-nivel-academico td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.6rem 1rem;
+    display: grid;
+    grid-template-columns: 40% 1fr; /* etiqueta | valor */
+    align-items: center;
+    gap: .75rem;
+    padding: .7rem 1rem;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
   }
+  .tabla-nivel-academico td:last-child { border-bottom: none; }
 
-  .tabla-nivel-academico td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #841816;
+  /* Rótulos automáticos por columna (sin data-attrs) */
+  .tabla-nivel-academico tbody tr td:nth-child(1)::before { content: "Tipo"; font-weight: 700; color: var(--brand); }
+  .tabla-nivel-academico tbody tr td:nth-child(2)::before { content: "Semestre"; font-weight: 700; color: var(--brand); }
+  .tabla-nivel-academico tbody tr td:nth-child(3)::before { content: "Grupo"; font-weight: 700; color: var(--brand); }
+  .tabla-nivel-academico tbody tr td:nth-child(4)::before { content: "Carrera"; font-weight: 700; color: var(--brand); }
+  .tabla-nivel-academico tbody tr td:nth-child(5)::before { content: "Acciones"; font-weight: 700; color: var(--brand); }
+
+  /* Botones ocupan toda la fila en “Acciones” */
+  .tabla-nivel-academico tbody tr td:nth-child(5) {
+    grid-template-columns: 1fr; /* etiqueta arriba, botones debajo */
   }
+  .tabla-nivel-academico td button {
+    width: 100%;
+    margin: 6px 0 0 0;
+  }
+}
 
-  .tabla-nivel-academico td:last-child {
-    border-bottom: none;
+/* 🖥️ TVs / 4K (≥1441px) — más aire */
+@media (min-width: 1441px){
+  .manage-nivel-academico-container{
+    max-width: 1280px;
+    padding: clamp(20px, 2vw, 36px);
+  }
+  .form-nivel-academico{
+    gap: clamp(12px, 1.4vw, 20px);
+    padding: clamp(14px, 1.6vw, 24px);
   }
 }

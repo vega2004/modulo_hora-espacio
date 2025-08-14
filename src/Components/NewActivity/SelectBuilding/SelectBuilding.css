@@ -1,9 +1,6 @@
 .select-building-container {
   text-align: center;
-  padding-top: 0.5rem; /* o 0 si quieres completamente pegado */
-  padding-right: 2rem;
-  padding-left: 2rem;
-  padding-bottom: 2rem;
+  padding: 0.5rem 2rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
@@ -34,9 +31,9 @@
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  border: 1px solid #e0e0e0;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #e0e0e0;
 }
 
 .card-edificio:hover {
@@ -64,7 +61,7 @@
 /* 📱 Teléfonos pequeños (hasta 480px) */
 @media (max-width: 480px) {
   .select-building-container {
-    padding: 1rem 1rem 2rem;
+    padding: 1rem;
   }
 
   .title {
@@ -75,10 +72,6 @@
   .grid-edificios {
     gap: 1.2rem;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .card-edificio {
-    max-width: 100%;
   }
 
   .imagen-edificio {

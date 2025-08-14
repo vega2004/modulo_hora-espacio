@@ -1,248 +1,263 @@
+/* =========================================================
+   ClassSearchReport.css — Responsivo total y consistente
+   ========================================================= */
+
+:root{
+  --brand:#841816;
+  --brand-dark:#6e1211;
+  --page:#f4f4f6;
+  --panel:#ffffff;
+  --text:#1e293b;
+  --radius-lg:12px;
+  --radius-md:10px;
+}
+
 /* Contenedor principal */
-.classsearch-report-container {
-  padding: 2rem;
-  font-family: 'Inter', sans-serif;
-  background-color: #f4f4f6;
+.classsearch-report-container{
+  padding: clamp(14px, 2.6vw, 32px);
+  font-family:'Inter', sans-serif;
+  background-color: var(--page);
   min-height: 100vh;
+  color: var(--text);
+  overflow-x: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Título */
-.classsearch-title {
-  font-size: 2.1rem !important;
-  /* más grande */
-  font-weight: 700;
-  color: #841816;
-  /* rojo UAEH */
+.classsearch-title{
+  font-size: clamp(1.4rem, 3vw, 2.1rem) !important;
+  font-weight: 800;
+  color: var(--brand);
   text-align: center;
-  margin: 4rem 0 2rem;
-  /* mayor separación arriba y abajo */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  /* sombra suave */
+  margin: clamp(18px, 6vw, 64px) 0 clamp(14px, 4vw, 32px);
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.15);
 }
 
 /* Filtros */
-.classsearch-filters {
+.classsearch-filters{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: clamp(16px, 3vw, 32px);
+  background-color: var(--panel);
+  padding: clamp(14px, 2.4vw, 24px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
 }
 
-/* Inputs y etiquetas */
-.classsearch-filters label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.25rem;
-  display: block;
+.classsearch-filters label{
+  font-size:.9rem;
+  font-weight:600;
+  color:#374151;
+  margin-bottom:.25rem;
+  display:block;
 }
 
 .classsearch-filters select,
-.classsearch-filters input {
-  width: 100%;
-  padding: 0.55rem 0.75rem;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  background-color: #e2e8f0;
-  /* gris visible */
-  color: #1e293b;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  /* sombra más prominente */
-  transition: all 0.3s ease;
+.classsearch-filters input{
+  width:100%;
+  padding:.6rem .85rem;
+  border:1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  font-size:.95rem;
+  background-color:#e2e8f0;
+  color:var(--text);
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  min-height:44px; /* target táctil */
 }
 
 .classsearch-filters select:focus,
-.classsearch-filters input:focus {
-  background-color: #f8fafc;
-  border-color: #841816;
-  box-shadow: 0 0 0 3px rgba(132, 24, 22, 0.3);
-  outline: none;
+.classsearch-filters input:focus{
+  background-color:#fff;
+  border-color:var(--brand);
+  box-shadow:0 0 0 3px rgba(132,24,22,.25);
+  outline:none;
 }
-
 
 /* Botón de búsqueda */
-.btn-buscar {
+.btn-buscar{
   grid-column: span 2;
-  padding: 0.6rem 1.3rem;
-  background-color: #841816;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  justify-self: start;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  padding:.65rem 1.3rem;
+  background-color: var(--brand);
+  color:#fff;
+  font-size:.95rem;
+  font-weight:700;
+  border:none;
+  border-radius: var(--radius-md);
+  cursor:pointer;
+  transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease;
+  justify-self:start;
+  box-shadow:0 3px 8px rgba(0,0,0,.15);
+  min-height:44px;
+}
+.btn-buscar:hover{ background-color: var(--brand-dark); transform: translateY(-1px); }
+.btn-buscar:disabled{ background:#cbd5e1; cursor:not-allowed; transform:none; }
+
+/* Wrapper de la tabla para scroll horizontal si hace falta */
+.tabla-resultados{
+  width:100%;
+  overflow-x:auto;          /* evita desbordes en pantallas estrechas */
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
+  border-radius: var(--radius-lg);
 }
 
-.btn-buscar:hover {
-  background-color: #6e1211;
-  transform: translateY(-1px);
-}
-
-/* Tabla moderna con divisiones */
-.classsearch-table {
-  width: 100%;
+/* Tabla */
+.classsearch-table{
+  width:100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #d1d5db;
+  background-color: var(--panel);
+  font-family:'Inter', sans-serif;
+  box-shadow:0 4px 16px rgba(0,0,0,.12);
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border:1px solid #d1d5db;
+  font-size:.95rem;
+  min-width: 760px;         /* asegura estructura legible en desktop */
+  text-align:center;
 }
 
 /* Cabecera */
-.classsearch-table thead th {
-  background-color: #841816;
-  color: white;
-  font-weight: 600;
-  padding: 1rem;
-  font-size: 0.95rem;
-  border: 1px solid #ccc;
-  text-align: center;
+.classsearch-table thead th{
+  background-color: var(--brand);
+  color:#fff;
+  font-weight:700;
+  padding:1rem;
+  font-size:.95rem;
+  border:1px solid #b91c1c;
+  text-align:center;
+  white-space:nowrap;
 }
 
 /* Cuerpo */
-.classsearch-table tbody td {
-  padding: 0.9rem 1rem;
-  font-size: 0.92rem;
-  color: #374151;
-  border: 1px solid #d1d5db;
-  background-color: #fdfdfd;
-  text-align: center;
+.classsearch-table tbody td{
+  padding:.9rem 1rem;
+  font-size:.92rem;
+  color:#374151;
+  border:1px solid #d1d5db;
+  background-color:#fdfdfd;
+  text-align:center;
+  vertical-align:middle;
+  word-break: break-word;
 }
 
-/* Fila alternada */
-.classsearch-table tbody tr:nth-child(even) {
-  background-color: #f3f4f6;
-}
+/* Fila alternada + hover */
+.classsearch-table tbody tr:nth-child(even){ background-color:#f7f7f9; }
+.classsearch-table tbody tr:hover{ background-color:#ececec; transition: background-color .2s ease; }
 
-/* Hover en fila */
-.classsearch-table tbody tr:hover {
-  background-color: #eaeaea;
-  transition: background-color 0.3s ease;
-}
-
-/* Bordes redondeados solo en esquinas exteriores */
-.classsearch-table thead th:first-child {
-  border-top-left-radius: 12px;
-}
-
-.classsearch-table thead th:last-child {
-  border-top-right-radius: 12px;
-}
-
-.classsearch-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 12px;
-}
-
-.classsearch-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 12px;
-}
+/* Esquinas redondeadas exteriores (visual) */
+.classsearch-table thead th:first-child{ border-top-left-radius: var(--radius-lg); }
+.classsearch-table thead th:last-child{ border-top-right-radius: var(--radius-lg); }
+.classsearch-table tbody tr:last-child td:first-child{ border-bottom-left-radius: var(--radius-lg); }
+.classsearch-table tbody tr:last-child td:last-child{ border-bottom-right-radius: var(--radius-lg); }
 
 /* Fila sin resultados */
-.no-results-row td {
-  text-align: center;
-  padding: 1.5rem;
-  font-style: italic;
-  background-color: #fff6f6;
-  color: #991b1b;
-  font-weight: 500;
-  border: none;
+.no-results-row td{
+  text-align:center;
+  padding:1.5rem;
+  font-style:italic;
+  background-color:#fff6f6;
+  color:#991b1b;
+  font-weight:500;
+  border:none;
 }
-
-/* Visualización sin resultados */
-.no-results-message {
-  text-align: center;
-  padding: 1.5rem;
-  color: #991b1b;
-  font-style: italic;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
+.no-results-message{
+  text-align:center;
+  padding:1.2rem;
+  color:#991b1b;
+  font-style:italic;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.75rem;
 }
+.no-results-icon{ width:64px; opacity:.6; }
 
-.no-results-icon {
-  width: 64px;
-  opacity: 0.6;
-}
+/* ===========================
+   Breakpoints / Responsive
+   =========================== */
 
-/* 📱 Teléfonos y pantallas pequeñas */
-@media (max-width: 768px) {
-  .classsearch-title {
-    font-size: 1.6rem !important;
-    margin: 2rem 0 1rem;
-  }
-
-  .classsearch-filters {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
-
-  .btn-buscar {
-    grid-column: span 1;
-    width: 100%;
-    justify-self: stretch;
-    text-align: center;
-  }
-
-  .classsearch-table thead {
-    display: none;
-  }
-
-  .classsearch-table tbody tr {
-    display: block;
-    margin-bottom: 1.2rem;
-    border-radius: 12px;
-    background-color: #fff;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .classsearch-table tbody td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
-    border: none;
-    border-bottom: 1px solid #eee;
-  }
-
-  .classsearch-table tbody td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #841816;
-    flex: 1;
-    text-align: left;
-  }
-
-  .no-results-row td {
-    display: block;
-    text-align: center;
-  }
-}
-
-/* 📲 Tablets */
-@media (max-width: 1024px) {
-  .classsearch-filters {
+/* Tablets */
+@media (max-width:1024px){
+  .classsearch-filters{
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
+  .btn-buscar{ font-size:.9rem; }
+}
 
-  .btn-buscar {
-    font-size: 0.88rem;
+/* Smartphones y pantallas pequeñas */
+@media (max-width:768px){
+  .classsearch-title{
+    font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+    margin: 2rem 0 1rem;
+  }
+  .classsearch-filters{
+    grid-template-columns: 1fr;
+    padding: clamp(12px, 3.2vw, 16px);
+    gap:.9rem;
+  }
+  .btn-buscar{
+    grid-column: span 1;
+    width:100%;
+    justify-self: stretch;
+    text-align:center;
+  }
+
+  /* Tabla en tarjetas (no requiere data-label) */
+  .classsearch-table thead{ display:none; }
+  .classsearch-table{
+    min-width: 0;           /* deja que se adapte al contenedor */
+    border: none;
+    box-shadow: none;
+  }
+  .classsearch-table tbody tr{
+    display:block;
+    margin-bottom:1rem;
+    border-radius: var(--radius-lg);
+    background:#fff;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+    overflow:hidden;
+  }
+  .classsearch-table tbody td{
+    display:grid;
+    grid-template-columns: 46% 1fr; /* etiqueta | valor */
+    gap:.6rem;
+    padding:.85rem 1rem;
+    border:none;
+    border-bottom:1px solid #eee;
+    text-align:left;
+  }
+  .classsearch-table tbody tr td:last-child{ border-bottom:none; }
+
+  /* Etiquetas automáticas por columna */
+  .classsearch-table tbody tr td:nth-child(1)::before{ content:"Curso"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(2)::before{ content:"Día"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(3)::before{ content:"Hora Inicio"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(4)::before{ content:"Hora Fin"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(5)::before{ content:"Profesor"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(6)::before{ content:"Aula"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(7)::before{ content:"Capacidad"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(8)::before{ content:"Semestre"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(9)::before{ content:"Grupo"; font-weight:700; color:var(--brand); }
+  .classsearch-table tbody tr td:nth-child(10)::before{ content:"Carrera"; font-weight:700; color:var(--brand); }
+
+  .no-results-row td{ display:block; text-align:center; }
+}
+
+/* TVs / Escritorios grandes */
+@media (min-width:1440px){
+  .classsearch-report-container{
+    max-width: 1400px;
   }
 }
 
-/* 🖥️ Pantallas grandes y TVs */
-@media (min-width: 1440px) {
-  .classsearch-report-container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+/* Accesibilidad: reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce){
+  .btn-buscar{ transition:none; }
+  .classsearch-filters select,
+  .classsearch-filters input{ transition:none; }
+  .classsearch-table tbody tr:hover{ transition:none; }
 }

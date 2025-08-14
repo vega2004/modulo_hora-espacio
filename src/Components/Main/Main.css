@@ -1,290 +1,198 @@
+/* =============== MAIN (pantalla principal) =============== */
+
 html, body {
   height: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #EAE3D8; /* 👈 Aquí está la solución */
+  background-color: #EAE3D8; /* fondo institucional */
+  overflow-x: hidden;        /* evita scroll lateral en móviles */
 }
 
-
-.main-container {
-    padding: 20px;
-    min-height: 100vh;
-    background-color: #EAE3D8;
+/* Contenido principal */
+.main-content{
+  background-color: #EAE3D8;
+  padding: clamp(8px, 2vw, 24px);
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
 }
 
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #EAE3D8;
-    padding: 16px 24px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 24px;
+/* ===== Carrusel (imágenes responsivas por ancho) ===== */
+.carousel-wrapper{
+  width: min(100%, 1400px);
+  margin-inline: auto;
+  margin-bottom: clamp(12px, 2.4vw, 28px);
+  border-radius: 16px;
+  overflow: clip; /* respeta bordes redondeados */
 }
 
-.main-header h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #333333;
+/* La librería ocupa 100% del contenedor */
+.carousel-root,
+.carousel { width: 100%; }
+
+/* Imágenes: llenan el ancho y mantienen proporción */
+.carousel .slide img{
+  width: 100%;
+  height: auto;          /* 👈 mantiene proporción natural */
+  display: block;
+  border-radius: 16px;
 }
 
-.logout-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Si alguna imagen es gigante en alto, limita en pantallas chicas */
+@media (max-width: 768px){
+  .carousel .slide img{ max-height: 340px; }
+}
+@media (max-width: 480px){
+  .carousel .slide img{ max-height: 260px; }
 }
 
-.logout-button:hover {
-    background-color: #c0392b;
+/* Puntos/controles sobrios */
+.carousel .control-dots{
+  margin: clamp(6px, 1.2vw, 12px) 8px;
+}
+.carousel .control-dots .dot{
+  box-shadow: none;
+  background: rgba(255,255,255,.75);
+}
+.carousel .control-dots .dot.selected{
+  background: #ffffff;
+}
+.carousel .control-arrow{
+  opacity: .85;
 }
 
-.main-content {
-    background-color: #EAE3D8;
-    padding: 10px;
-    margin-top: 0px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+/* Indicadores personalizados (coinciden con renderIndicator del JSX) */
+.carousel-wrapper .indicator{
+  display: inline-block;
+  width: 10px; height: 10px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+  cursor: pointer;
+}
+.carousel-wrapper .indicator.selected{ background: #fff; }
+
+/* ===== Tarjetas ===== */
+.cards-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(12px, 2.2vw, 24px);
+  width: min(100%, 1400px);
+  margin-inline: auto;
+  padding: clamp(8px, 2vw, 20px);
 }
 
-.main-content h2 {
-    margin-top: 0;
-    font-size: 20px;
-    color: #2c3e50;
+.card{
+  background-color: #ffffff;
+  border: 1px solid rgba(0,0,0,.5);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,.10);
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.card:hover{ transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,.18); }
+
+.card-image{
+  width: 100%;
+  height: clamp(130px, 18vw, 200px); /* altura fluida */
+  object-fit: cover; /* recorta sin deformar */
+  display: block;
 }
 
-.main-content p {
-    color: #555555;
+.card-footer{
+  background-color: #b61c22;
+  color: #000000;
+  padding: clamp(10px, 1.6vw, 12px);
+  border-top: 1px solid #b32c1f;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.card:hover .card-footer{ background-color: #d81111; }
+
+.card h3{
+  margin: 4px 0 0 0;
+  color: #ffffff;
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+/* ===== Encabezado opcional (si lo usas aquí) ===== */
+.main-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #EAE3D8;
+  padding: clamp(12px, 2vw, 16px) clamp(16px, 2.6vw, 24px);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  margin-bottom: clamp(12px, 2vw, 24px);
 }
-
-
-.card {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    overflow: hidden;
-    /* Para que el footer se adapte a la tarjeta */
-    width: 100%;
-    max-width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-align: center;
-    cursor: pointer;
+.main-header h1{
+  margin: 0;
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-
-.card-image {
-    width: 100%;
-    height: 180px;
-    /* Fija la altura que deseas */
-    object-fit: cover;
-    /* Recorta la imagen para mantener proporción sin deformarla */
-    display: block;
+.logout-button{
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .3s ease;
+  min-height: 44px;
 }
+.logout-button:hover{ background-color: #c0392b; }
 
+/* ===== Ajustes por tamaño ===== */
 
-.card-footer {
-    background-color: #b61c22;
-    color: rgb(0, 0, 0);
-    padding: 12px;
-    border-top: 1px solid #b32c1f;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-
-.card:hover .card-footer {
-    background-color: #d81111;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-}
-
-
-.card h3 {
-    margin-top: 5px;
-    color: #ffffff;
-    font-size: 18px;
-}
-
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-wrapper {
-    margin: 2px 80px;
-}
-
-/* 💻 Pantallas medianas como laptops/tablets */
-@media (max-width: 1024px) {
-  .main-header {
+/* Laptops/tablets <=1024px */
+@media (max-width: 1024px){
+  .main-header{
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 12px;
   }
-
-  .main-header h1 {
-    font-size: 22px;
-  }
-
-  .logout-button {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-
-  .cards-container {
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .card {
-    max-width: 260px;
-  }
-
-  .card-image {
-    height: 160px;
-  }
+  .cards-container{ gap: clamp(12px, 2vw, 16px); }
 }
 
-/* 📱 Smartphones grandes */
-@media (max-width: 768px) {
-  .main-header {
-    padding: 12px 16px;
+/* Smartphones medianos <=768px */
+@media (max-width: 768px){
+  .cards-container{
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: clamp(8px, 2vw, 12px);
   }
-
-  .main-header h1 {
-    font-size: 20px;
-  }
-
-  .main-content h2 {
-    font-size: 18px;
-  }
-
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-
-  .card {
-    width: 90%;
-    max-width: 100%;
-  }
-
-  .card-image {
-    height: 150px;
-  }
-
-  .carousel-wrapper {
-    margin: 2px 20px;
-  }
+  .card-image{ height: clamp(130px, 24vw, 180px); }
 }
 
-/* 📳 Teléfonos pequeños */
-@media (max-width: 480px) {
-  .main-header {
-    padding: 10px;
-  }
-
-  .main-header h1 {
-    font-size: 18px;
-  }
-
-  .logout-button {
-    width: 100%;
-    text-align: center;
-    font-size: 13px;
-  }
-
-  .main-content {
-    padding: 10px;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .card-image {
-    height: 130px;
-  }
-
-  .card-footer {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .carousel-wrapper {
-    margin: 0 10px;
-  }
+/* Teléfonos comunes <=480px */
+@media (max-width: 480px){
+  .cards-container{ grid-template-columns: 1fr; }
+  .card-image{ height: clamp(120px, 38vw, 160px); }
+  .main-header h1{ font-size: clamp(16px, 5.2vw, 20px); }
+  .logout-button{ width: 100%; text-align: center; font-size: 13px; }
 }
 
-.site-footer{
-  background: var(--brand);
-  color: var(--text-on-brand);
-  padding: 14px 24px;
-  border-top: 3px solid var(--brand-900);
-  box-shadow: 0 -2px 12px rgba(0,0,0,.08);
+/* TVs y pantallas muy grandes (>=1441px) */
+@media (min-width: 1441px){
+  .main-content{ padding: clamp(16px, 2.2vw, 28px); }
+  .cards-container{
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(16px, 1.6vw, 28px);
+  }
 }
-
-.site-footer__inner{
-  max-width: 1200px;
-  margin: 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 10px 14px;
-  flex-wrap: wrap;
-  text-align: center;
-  font-size: .95rem;
-  line-height: 1.35;
-}
-
-.site-footer__brand{
-  font-weight: 700;
-  letter-spacing: .3px;
-}
-
-/* Variante clara (por si prefieres que combine con el fondo beige)
-   Agrega 'site-footer--light' junto a 'site-footer' en el JSX si la quieres usar.*/
-.site-footer--light{
-  background: #fff;
-  color: #222;
-  border-top: 1px solid rgba(0,0,0,.08);
-}
-.site-footer {
-  background: var(--brand); /* #841816 */
-  color: #fff; /* texto en blanco */
-}
-
-.site-footer a {
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-}
-
-.site-footer a:hover {
-  border-bottom-color: #fff;
-  opacity: 0.85;
-}
-
-.site-footer--light a:hover{ border-bottom-color: #111; }
-

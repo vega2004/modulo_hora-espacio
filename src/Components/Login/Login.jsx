@@ -63,46 +63,48 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="wrapper-login">
-      <form onSubmit={handleSubmit}>
-        <h1>Inicio de Sesión</h1>
+    <div className="login-page">
+      <div className="wrapper-login">
+        <form onSubmit={handleSubmit}>
+          <h1>Inicio de Sesión</h1>
 
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
+          {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
 
-        <div className="input-box-login">
-          <FaUser className="icon-left" />
-          <input
-            type="text"
-            placeholder="Username"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+          <div className="input-box-login">
+            <FaUser className="icon-left" />
+            <input
+              type="text"
+              placeholder="Username"
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="input-box-login">
-          <FaLock className="icon-left" />
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            value={Pass}
-            onChange={(e) => setPass(e.target.value)}
-            required
-          />
-          <span className="toggle-password" onClick={toggleShowPassword}>
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
-        </div>
+          <div className="input-box-login">
+            <FaLock className="icon-left" />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={Pass}
+              onChange={(e) => setPass(e.target.value)}
+              required
+            />
+            <span className="toggle-password" onClick={toggleShowPassword}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
 
-        <button type="submit">Iniciar Sesión</button>
+          <button type="submit">Iniciar Sesión</button>
 
-        <div className="register-link-login">
-          <p>
-            ¿Aún no tienes una cuenta? <Link to="/Register">Registrarse</Link>
-          </p>
-        </div>
-      </form>
+          <div className="register-link-login">
+            <p>
+              ¿Aún no tienes una cuenta? <Link to="/Register">Registrarse</Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -165,7 +165,6 @@ const AppContent = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
       {menuOpen && <div className="menu-overlay" onClick={() => setMenuOpen(false)} />}
 
       <div className="main-content">
-        {location.pathname === '/' && <TitleWithTransition />}
 
         <TransitionWrapper location={location}>
           <Routes location={location}>

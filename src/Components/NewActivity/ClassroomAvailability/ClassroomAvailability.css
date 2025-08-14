@@ -1,202 +1,240 @@
-/* 📀 Título centrado */
+/* ================================
+   ClassroomAvailability.css (FULL)
+   ================================ */
+
+/* Tipografía base coherente */
+:root {
+  --brand: #841816;
+  --brand-dark: #6e1211;
+  --text: #1a202c;
+  --muted: #e2e8f0;
+  --line: #d1d5db;
+  --bg: #f7f9fb;
+}
+
+/* Contenedor general */
+.wrapper-select-aulas {
+  font-family: 'Inter', sans-serif;
+  background: #f4f4f6;
+  min-height: 100%;
+  padding: 1rem 1.25rem 2rem;
+}
+
+/* Título */
 .titulo-matriz-aulas {
   font-size: 2.1rem !important;
   font-weight: 700;
-  color: #841816;
+  color: var(--brand);
   text-align: center;
-  margin: 4rem 0 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin: 3rem 0 1.75rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.2);
 }
 
-/* 📦 Agrupación de controles */
+/* Grupo de controles (volver + select + ver disponibilidad) */
 .seccion-controles-aulas {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem 1.25rem;
   flex-wrap: wrap;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0 1.5rem;
 }
 
-/* 🪜 Alineación derecha de select y botón */
+/* Lado derecho (select + botón) */
 .acciones-derecha-aulas {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
-/* 🔙 Botón de inicio */
+/* Botón volver */
 .btn-volver-panel {
   background-color: #6c757d;
-  color: white;
-  padding: 0.65rem 1.4rem;
+  color: #fff;
+  padding: .65rem 1.4rem;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  transition: background-color .25s ease, transform .2s ease;
+  min-height: 44px;
 }
-.btn-volver-panel:hover { background-color: #545b62; }
+.btn-volver-panel:hover { background-color: #545b62; transform: translateY(-1px); }
 
-/* 🔍 Botón de disponibilidad */
+/* Botón ver disponibilidad general */
 .btn-ver-disponibilidad {
-  background: linear-gradient(to right, #841816, #a11c1a);
-  color: white;
-  padding: 0.65rem 1.5rem;
+  background: linear-gradient(to right, var(--brand), #a11c1a);
+  color: #fff;
+  padding: .65rem 1.5rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(132, 24, 22, 0.25);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(132,24,22,.25);
+  transition: background-color .25s ease, transform .2s ease;
+  min-height: 44px;
 }
-.btn-ver-disponibilidad:hover { background: #6e1211; }
+.btn-ver-disponibilidad:hover { background: var(--brand-dark); transform: translateY(-1px); }
 
-/* 🔹 Select */
+/* Select */
 .wrapper-select-aulas select {
-  padding: 0.6rem 1rem;
+  padding: .6rem 1rem;
   font-size: 1rem;
   border-radius: 8px;
   border: 1.5px solid #ccc;
   background-color: #e2e8f0;
-  color: #1a202c;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s ease-in-out;
+  color: var(--text);
+  box-shadow: 0 2px 5px rgba(0,0,0,.05);
+  transition: border-color .25s ease;
+  min-width: 220px;
+  min-height: 44px;
 }
 .wrapper-select-aulas select:focus {
-  border-color: #841816;
+  border-color: var(--brand);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(132,24,22,.2);
 }
 
-/* 📊 Contenedor con scroll */
+/* Contenedor con scroll horizontal (tabla) */
 .tabla-scroll-x {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  background: #fff;
 }
 
-/* 📊 Tabla de disponibilidad adaptable */
+/* Tabla */
 .matriz-disponibilidad-aulas {
   width: 100%;
-  min-width: 900px; /* Fuerza scroll si no cabe */
-  table-layout: fixed; /* Necesario para ellipsis */
+  min-width: 760px;              /* ↓ más amigable que 900px para móviles */
+  table-layout: fixed;           /* necesario para ellipsis */
   border-collapse: collapse;
   text-align: center;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: .95rem;
 }
+
+/* Celdas y cabeceras */
 .matriz-disponibilidad-aulas th,
 .matriz-disponibilidad-aulas td {
-  padding: 0.75rem;
+  padding: .75rem;
   border: 1px solid #ccc;
-  white-space: nowrap;
+  white-space: nowrap;           /* evita saltos raros */
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Cabecera sticky */
 .matriz-disponibilidad-aulas thead th {
-  background-color: #841816;
-  color: white;
+  background-color: var(--brand);
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 2;
+  font-weight: 700;
 }
+
+/* Columna de horas sticky (primera columna) */
 .hora-etiqueta {
-  font-weight: bold;
+  font-weight: 700;
   background-color: #f8f9fa;
   color: #212529;
+}
+.hora-sticky {
   position: sticky;
   left: 0;
-  z-index: 3;
+  z-index: 3;                    /* sobre cabecera */
+  background: #f8f9fa;
+  border-right: 1px solid #ccc;
 }
 
-/* 🔳 Celdas libres */
+/* Celdas disponibles */
 .celda-disponible {
   background-color: #edf2f7;
-  color: #1a202c;
+  color: var(--text);
 }
 
-/* 🔴 Celdas ocupadas */
+/* Celdas reservadas */
 .celda-reservada {
   background-color: #9b1c1c;
-  color: #ffffff;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 700;
+}
+.celda-reservada div {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .celda-reservada small {
   display: block;
-  margin-top: 0.25rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: normal;
-  font-size: 0.85rem;
+  margin-top: .25rem;
+  color: rgba(255,255,255,.9);
+  font-weight: 500;
+  font-size: .85rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* 📱 Teléfonos pequeños (hasta 480px) */
-@media (max-width: 480px) {
-  .seccion-controles-aulas {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-  .acciones-derecha-aulas {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
-  }
-  .btn-volver-panel,
-  .btn-ver-disponibilidad,
-  .wrapper-select-aulas select {
-    width: 100%;
-  }
-  .titulo-matriz-aulas {
-    font-size: 1.5rem !important;
-    margin-top: 2rem;
-  }
-  .matriz-disponibilidad-aulas th,
-  .matriz-disponibilidad-aulas td {
-    padding: 0.4rem;
-    font-size: 0.75rem;
-  }
-  .hora-etiqueta { font-size: 0.8rem; }
-  .celda-reservada div { font-size: 0.75rem; }
-  .celda-reservada small { font-size: 0.7rem; }
-}
+/* =================
+   BREAKPOINTS
+   ================= */
 
-/* 📱 Teléfonos medianos (481px - 767px) */
-@media (max-width: 767px) {
-  .seccion-controles-aulas {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  .acciones-derecha-aulas {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn-volver-panel,
-  .btn-ver-disponibilidad,
-  .wrapper-select-aulas select {
-    width: 100%;
-  }
-}
-
-/* 📱📲 Tablets y pantallas medianas (768px - 1024px) */
+/* Tablets medianas (≤1024px) */
 @media (max-width: 1024px) {
+  .titulo-matriz-aulas { font-size: 1.9rem !important; margin: 2.5rem 0 1.5rem; }
+  .acciones-derecha-aulas { gap: .8rem; }
   .matriz-disponibilidad-aulas th,
-  .matriz-disponibilidad-aulas td {
-    padding: 0.5rem;
-    font-size: 0.85rem;
-  }
-  .titulo-matriz-aulas { font-size: 1.8rem !important; }
+  .matriz-disponibilidad-aulas td { padding: .6rem; font-size: .9rem; }
 }
 
-/* 🖥️ Pantallas grandes (más de 1920px) */
+/* Móviles grandes (≤768px) */
+@media (max-width: 768px) {
+  .wrapper-select-aulas { padding: 1rem; }
+  .seccion-controles-aulas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .acciones-derecha-aulas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-volver-panel,
+  .btn-ver-disponibilidad,
+  .wrapper-select-aulas select {
+    width: 100%;
+  }
+  .matriz-disponibilidad-aulas { min-width: 680px; } /* un poco más compacta */
+}
+
+/* Móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .titulo-matriz-aulas {
+    font-size: 1.55rem !important;
+    margin: 2rem 0 1rem;
+  }
+  .matriz-disponibilidad-aulas { min-width: 640px; }
+  .matriz-disponibilidad-aulas th,
+  .matriz-disponibilidad-aulas td { padding: .45rem; font-size: .8rem; }
+  .hora-etiqueta { font-size: .82rem; }
+  .celda-reservada div { font-size: .78rem; }
+  .celda-reservada small { font-size: .72rem; }
+}
+
+/* Pantallas grandes (≥1440px) */
+@media (min-width: 1440px) {
+  .wrapper-select-aulas { max-width: 1400px; margin: 0 auto; }
+  .matriz-disponibilidad-aulas th,
+  .matriz-disponibilidad-aulas td { padding: .9rem; font-size: 1rem; }
+}
+
+/* TVs/Ultra wide (≥1921px) */
 @media (min-width: 1921px) {
+  .titulo-matriz-aulas { font-size: 2.5rem !important; }
   .matriz-disponibilidad-aulas { font-size: 1.05rem; }
   .matriz-disponibilidad-aulas th,
   .matriz-disponibilidad-aulas td { padding: 1rem; }
-  .titulo-matriz-aulas { font-size: 2.5rem !important; }
 }
